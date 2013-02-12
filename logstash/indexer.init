@@ -14,7 +14,7 @@ expect fork
 
 # You need to chdir somewhere writable because logstash needs to unpack a few
 # temporary files on startup.
-chdir /opt/logstash
+chdir /mnt/logstash
 
 script
 
