@@ -1,0 +1,24 @@
+node:
+  master: true
+  data: true
+
+path:
+  conf: /etc/elasticsearch
+  data: /mnt/elasticsearch
+  logs: /var/log/elasticsearch
+
+index:
+  number_of_shards: 1
+  number_of_replicas: 0
+  query.default_field: "@message"
+  store:
+    compress:
+      stored: true
+      tv: true
+
+
+discovery.zen:
+  minimum_master_nodes: 1
+  ping:
+    multicast.enabled: false
+    unicast.hosts: ["172.0.0.1"]
