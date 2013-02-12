@@ -1,0 +1,16 @@
+{
+    "_default_": {
+        "_all": { "enabled": false },
+        "_source": { "compress": true },
+        "dynamic_templates": [
+            {  
+                "string_template" : {
+                    "match" : "*",
+                    "mapping": { "type": "string", "index": "not_analyzed" },
+                    "match_mapping_type" : "string"
+                }
+            }
+        ]
+    }
+}
+

@@ -13,15 +13,7 @@ elasticsearch:
       - file: /var/log/elasticsearch
     - watch:
       - file: /etc/elasticsearch/elasticsearch.yml
-
-/etc/elasticsearch/elasticsearch.yml:
-  file.managed:
-    - source: salt://elasticsearch/elasticsearch.yml
-    - user: root
-    - group: root
-    - mode: 0644
-    - require:
-      - pkg: elasticsearch
+      - file: /etc/elasticsearch/default_mapping.json
 
 /mnt/elasticsearch:
   file.directory:
@@ -34,5 +26,23 @@ elasticsearch:
   file.directory:
     - user: elasticsearch
     - group: elasticsearch
+    - require:
+      - pkg: elasticsearch
+
+/etc/elasticsearch/elasticsearch.yml:
+  file.managed:
+    - source: salt://elasticsearch/elasticsearch.yml
+    - user: root
+    - group: root
+    - mode: 0644
+    - require:
+      - pkg: elasticsearch
+
+/etc/elasticsearch/default_mapping.json:
+  file.managed:
+    - source: salt://elasticsearch/default_mapping.json
+    - user: root
+    - group: root
+    - mode: 0644
     - require:
       - pkg: elasticsearch

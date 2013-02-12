@@ -16,7 +16,6 @@ index:
       stored: true
       tv: true
 
-
 discovery.zen:
   minimum_master_nodes: 1
   ping:
