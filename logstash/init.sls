@@ -1,3 +1,6 @@
+include:
+  - java
+
 logstash:
   user.present:
     - home: /mnt/logstash
@@ -11,13 +14,13 @@ logstash:
 
 /mnt/logstash/logstash.jar:
   file.managed:
-    - source: https://logstash.objects.dreamhost.com/release/logstash-1.1.9-monolithic.jar 
-    - source_hash: md5=70addd3ccd37e796f473fe5647c31126
+    - source: salt://logstash/logstash-1.1.9-monolithic.jar 
     - user: logstash
     - group: logstash
     - require:
       - user: logstash
       - group: logstash
+      - pkg: java
 
 /var/log/logstash:
   file.directory:
