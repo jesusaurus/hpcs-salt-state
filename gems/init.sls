@@ -1,0 +1,3 @@
+rubygems:
+  pkg:
+    - installed
