@@ -1,4 +1,10 @@
 base:
-  'roles:logstash':
+  'roles:logstash-indexer':
     - match: grain
-    - logstash
+    - logstash.indexer
+  'roles:redis':
+    - match: grain
+    - redis
+  'roles:elasticsearch':
+    - match: grain
+    - elasticsearch
