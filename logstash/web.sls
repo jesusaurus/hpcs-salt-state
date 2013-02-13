@@ -1,2 +1,3 @@
 include:
   - kibana
+  - kibana.proxy
