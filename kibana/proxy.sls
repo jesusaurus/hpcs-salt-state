@@ -1,13 +1,6 @@
 include:
   - nginx
 
-extend:
-  nginx:
-    service:
-      - watch:
-        - file: /etc/nginx/sites-enabled/default
+{% from "nginx/init.sls" import proxy %}
 
-/etc/nginx/sites-enabled/default:
-  file.managed:
-    - source: salt://kibana/proxy.conf
-
+{{ proxy(site='kibana', server='127.0.0.1', port='5601', http=False, https=True) }}
