@@ -10,6 +10,7 @@ include:
 /etc/logstash/indexer.conf:
   file.managed:
     - source: salt://logstash/indexer.conf
+    - template: jinja
     - user: logstash
     - group: logstash
     - require:
