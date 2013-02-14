@@ -6,9 +6,10 @@ elasticsearch:
     - installed
     - sources: 
       - elasticsearch: http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.20.2.deb
-  service.running:
     - require:
       - pkg: java
+  service.running:
+    - require:
       - pkg: elasticsearch
       - file: /mnt/elasticsearch
       - file: /var/log/elasticsearch

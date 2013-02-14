@@ -16,7 +16,7 @@ chdir /mnt/kibana
 
 script
 
-  su -s /bin/sh -c 'exec "$0" "$@"' kibana -- /usr/bin/ruby kibana.rb
+  su -s /bin/sh -c 'exec "$0" "$@"' kibana -- /usr/bin/ruby kibana-daemon.rb start &
   emit kibana-running
 end script
 

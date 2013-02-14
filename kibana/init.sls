@@ -27,17 +27,21 @@ kibana:
     - require:
       - pkg: git
       - file: /mnt/kibana
-  cmd.wait:
+  cmd.run:
     - name: bundle install
     - cwd: /mnt/kibana
     - require:
       - gem: bundler
       - file: /mnt/kibana/KibanaConfig.rb
+    - watch:
+      - git: kibana
   service.running:
     - require:
       - file: /etc/init/kibana.conf
+      - file: /mnt/kibana/KibanaConfig.rb
       - cmd: kibana
     - watch:
+      - file: /etc/init/kibana.conf
       - file: /mnt/kibana/KibanaConfig.rb
 
 /mnt/kibana:

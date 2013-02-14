@@ -10,4 +10,6 @@ extend:
 /etc/nginx/sites-enabled/default:
   file.managed:
     - source: salt://kibana/proxy.conf
-
+    - require:
+      - file: /var/lib/nginx/ssl/kibana.proxy.crt
+      - file: /var/lib/nginx/ssl/kibana.proxy.key
