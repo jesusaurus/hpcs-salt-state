@@ -11,6 +11,7 @@ redis-server:
 /etc/redis/redis.conf:
   file.managed:
     - source: salt://redis/redis.conf
+    - template: jinja
     - user: root
     - group: root
     - mode: 0644
