@@ -35,19 +35,19 @@ module KibanaConfig
 
   # Format for timestamps. Defaults to mm/dd HH:MM:ss.
   # For syntax see: http://blog.stevenlevithan.com/archives/date-time-format
-  # Time_format = 'isoDateTime' 
+  # Time_format = 'isoDateTime'
   Time_format = 'mm/dd HH:MM:ss'
 
   # Change which fields are shown by default. Must be set as an array
   # Default_fields = ['@fields.vhost','@fields.response','@fields.request']
   Default_fields = ['@fields.job', '@fields.build', '@message']
 
-  # If set to true, Kibana will use the Highlight feature of Elasticsearch to 
+  # If set to true, Kibana will use the Highlight feature of Elasticsearch to
   # display highlighted search results
   Highlight_results = true
 
-  # A field needs to be specified for the highlight feature. By default, 
-  # Elasticsearch doesn't allow highlighting on _all because the field has to 
+  # A field needs to be specified for the highlight feature. By default,
+  # Elasticsearch doesn't allow highlighting on _all because the field has to
   # be either stored or part of the _source field.
   Highlighted_field = "@message"
 
@@ -90,11 +90,11 @@ module KibanaConfig
   # indexing
   Smart_index = true
 
-  # You can define your custom pattern here for index names if you 
-  # use something other than daily indexing. Pattern needs to have 
-  # date formatting like '%Y.%m.%d'.  Will accept an array of smart 
-  # indexes.  
-  # Smart_index_pattern = ['logstash-web-%Y.%m.%d', 'logstash-mail-%Y.%m.%d'] 
+  # You can define your custom pattern here for index names if you
+  # use something other than daily indexing. Pattern needs to have
+  # date formatting like '%Y.%m.%d'.  Will accept an array of smart
+  # indexes.
+  # Smart_index_pattern = ['logstash-web-%Y.%m.%d', 'logstash-mail-%Y.%m.%d']
   Smart_index_pattern = 'logstash-%Y.%m.%d'
 
   # Number of seconds between each index. 86400 = 1 day.
@@ -108,7 +108,7 @@ module KibanaConfig
 
   # Elasticsearch has an internal mechanism called "faceting" for performing
   # analysis that we use for the "Stats" and "Terms" modes. However, on large
-  # data sets/queries facetting can cause ES to crash if there isn't enough 
+  # data sets/queries facetting can cause ES to crash if there isn't enough
   # memory available. It is suggested that you limit the number of indices that
   # Kibana will use for the "Stats" and "Terms" to prevent ES crashes. For very
   # large data sets and undersized ES clusers, a limit of 1 is not unreasonable.
