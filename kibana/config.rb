@@ -40,7 +40,7 @@ module KibanaConfig
 
   # Change which fields are shown by default. Must be set as an array
   # Default_fields = ['@fields.vhost','@fields.response','@fields.request']
-  Default_fields = ['@message']
+  Default_fields = ['@fields.job', '@fields.build', '@message']
 
   # If set to true, Kibana will use the Highlight feature of Elasticsearch to 
   # display highlighted search results
