@@ -24,4 +24,5 @@ logstash-indexer:
       - file: /var/log/logstash
     - watch:
       - file: /etc/logstash/indexer.conf
+      - file: /etc/init/logstash-indexer.conf
   
