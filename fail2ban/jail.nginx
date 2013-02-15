@@ -1,0 +1,28 @@
+#
+# HTTP servers
+#
+
+[nginx]
+
+enabled  = true
+port     = http,https
+filter   = apache-auth
+logpath  = /var/log/nginx*/*error.log
+maxretry = 6
+
+[nginx-noscript]
+
+enabled  = true
+port     = http,https
+filter   = apache-noscript
+logpath  = /var/log/nginx*/*error.log
+maxretry = 6
+
+[nginx-overflows]
+
+enabled  = true
+port     = http,https
+filter   = apache-overflows
+logpath  = /var/log/nginx*/*error.log
+maxretry = 3
+

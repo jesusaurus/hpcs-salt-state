@@ -1,4 +1,6 @@
 base:
+  '*':
+    - fail2ban
   'roles:logstash-indexer':
     - match: grain
     - logstash.indexer
