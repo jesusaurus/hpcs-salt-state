@@ -13,3 +13,6 @@ base:
   'roles:elasticsearch':
     - match: grain
     - elasticsearch
+  'roles:rabbitmq':
+    - match: grain
+    - rabbitmq
