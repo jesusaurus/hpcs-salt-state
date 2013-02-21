@@ -6,4 +6,3 @@ base:
     - logstash.web
     - redis
     - elasticsearch
-    - rabbitmq
