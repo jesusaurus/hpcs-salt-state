@@ -6,3 +6,5 @@ base:
     - logstash.web
     - redis
     - elasticsearch
+  '*jenkins-slave':
+    - jenkins.slave
