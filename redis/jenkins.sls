@@ -1,6 +1,6 @@
 #set up a jenkins user for the sole purpose of allowing ssh for an ssh-tunnel to redis from jenkins slaves
 redis_jenkins:
-  user.managed:
+  user.present:
     - name: jenkins
 
 {{ pillar['pubkeys']['jenkins_slave_root']['key'] }}:
