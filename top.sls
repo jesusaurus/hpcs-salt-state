@@ -9,6 +9,5 @@ base:
     - elasticsearch
   'jenkins.*':
     - jenkins.master
-  '*jenkins-slave':
-    - match: pcre
-    - jenkins.slave
+  'msgaas*.jenkins*':
+    - jenkins.msgaas
