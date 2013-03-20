@@ -1,6 +1,25 @@
 include:
   - java
 
+jenkins:
+  user.present:
+    - home: /home/jenkins
+    - shell: /bin/sh
+    - gid_from_name: True
+    - require:
+      - group: jenkins
+  group:
+    - present
+
+{{ pillar['pubkeys']['jenkins_master']['key'] }}:
+  ssh_auth:
+    - present
+    - user: jenkins
+    - enc: {{ pillar['pubkeys']['jenkins_master']['enc'] }}
+    - comment: {{ pillar['pubkeys']['jenkins_master']['comment'] }}
+    - require:
+      - user: jenkins
+
 build_env:
   pkg.installed:
     - name: maven
