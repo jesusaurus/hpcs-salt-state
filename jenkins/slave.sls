@@ -1,3 +1,6 @@
+include:
+  - java
+
 build_env:
   pkg.installed:
     - name: maven
