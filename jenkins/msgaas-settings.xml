@@ -1,0 +1,63 @@
+<settings>
+  <localRepository/>
+  <interactiveMode/>
+  <usePluginRegistry/>
+  <offline/>
+  <pluginGroups/>
+  <servers>
+    <server>
+      <id>{{ pillar['msgaas']['nexus_id'] }}</id>
+      <username>{{ pillar['msgaas']['nexus_user'] }}</username>
+      <password>{{ pillar['msgaas']['nexus_pass'] }}</password> <!-- impossible password here :-) -->
+    </server>
+  </servers>
+  <mirrors>
+    <mirror>
+      <!--This sends everything else to /public -->
+      <id>nexus</id>
+      <mirrorOf>*</mirrorOf>
+      <url>{{ pillar['msgaas']['nexus_url'] }}</url>
+    </mirror>
+  </mirrors>
+  <profiles>
+    <profile>
+      <id>nexus</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <!--Enable snapshots for the built in central repo to direct -->
+      <!--all requests to nexus via the mirror -->
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+     <pluginRepositories>
+        <pluginRepository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+    <profile>
+      <id>sonar</id>
+      <properties>
+        <sonar.jdbc.url>{{ pillar['msgaas']['sonar_jdbc'] }}</sonar.jdbc.url>
+        <sonar.jdbc.driverClassName>com.mysql.jdbc.Driver</sonar.jdbc.driverClassName>
+        <sonar.jdbc.username>{{ pillar['msgaas']['sonar_user'] }}</sonar.jdbc.username>
+        <sonar.jdbc.password>{{ pillar['msgaas']['sonar_pass'] }}</sonar.jdbc.password>
+        <!-- optional URL to server. Default value is http://localhost:9000 -->
+        <sonar.host.url>{{ pillar['msgaas']['sonar_host'] }}</sonar.host.url>
+      </properties>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <!--make the profile active all the time -->
+    <activeProfile>nexus</activeProfile>
+  </activeProfiles>
+</settings>
