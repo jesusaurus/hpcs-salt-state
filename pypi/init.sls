@@ -42,3 +42,4 @@ pypiserver:
 /etc/default/pypiserver:
   file.managed:
     - source: salt://pypi/pypiserver.conf
+    - template: jinja
