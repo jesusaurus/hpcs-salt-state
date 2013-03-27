@@ -1,3 +1,6 @@
+include:
+  - pip
+
 pypi:
   group:
     - present
@@ -11,6 +14,7 @@ pypi:
 pypiserver:
   pip.installed:
     - require:
+      - pkg: pip
       - user: pypi
   service.running:
     - enabled: True
