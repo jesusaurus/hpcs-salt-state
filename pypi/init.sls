@@ -1,7 +1,7 @@
 include:
   - pip
 
-pypi:
+{{ pillar['pypi']['user'] }}:
   group:
     - present
   user.present:
@@ -9,13 +9,13 @@ pypi:
     - shell: /bin/bash
     - gid_from_name: True
     - require:
-      - group: pypi
+      - group: {{ pillar['pypi']['user'] }}
 
 pypiserver:
   pip.installed:
     - require:
       - pkg: pip
-      - user: pypi
+      - user: {{ pillar['pypi']['user'] }}
   service.running:
     - enabled: True
     - require:
@@ -26,13 +26,13 @@ pypiserver:
 {{ pillar['pypi']['path'] }}:
   file.directory:
     - makedirs: True
-    - user: pypi
-    - group: pypi
+    - user: {{ pillar['pypi']['user'] }}
+    - group: {{ pillar['pypi']['user'] }}
     - recurse:
       - user
       - group
     - require:
-      - user: pypi
+      - user: {{ pillar['pypi']['user'] }}
 
 /etc/init.d/pypiserver:
   file.managed:

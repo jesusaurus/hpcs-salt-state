@@ -49,7 +49,7 @@ do_start()
         log_daemon_msg "Found existing PID file. NOT starting" "$NAME"
     else
 	    start-stop-daemon --start --background --make-pid --pidfile $PIDFILE \
-            --exec $DAEMON -- $DAEMON_ARGS || return 2
+            --chuid ${RUNAS} --exec $DAEMON -- $DAEMON_ARGS || return 2
     fi
 }
 
