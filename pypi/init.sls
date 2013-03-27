@@ -2,17 +2,26 @@ pypi:
   group:
     - present
   user.present:
-    - home: /var/local/pypi
+    - home: {{ pillar['pypi']['home'] }}
     - shell: /bin/bash
     - gid_from_name: True
     - require:
       - group: pypi
+
+pypiserver:
   pip.installed:
-    - name: pypiserver
     - require:
       - user: pypi
+  service.running:
+    - enabled: True
+    - require:
+      - file: {{ pillar['pypi']['path'] }}
+      - file: /etc/init.d/pypiserver
+      - file: /etc/default/pypiserver
+
+{{ pillar['pypi']['path'] }}:
   file.directory:
-    - name: /var/local/pypi/packages:
+    - makedirs: True
     - user: pypi
     - group: pypi
     - recurse:
@@ -20,17 +29,12 @@ pypi:
       - group
     - require:
       - user: pypi
+
+/etc/init.d/pypiserver:
   file.managed:
-    - name: /etc/init.d/pypiserver
     - source: salt://pypi/pypiserver.init
     - mode: 755
+
+/etc/default/pypiserver:
   file.managed:
-    - name: /etc/default/pypiserver
     - source: salt://pypi/pypiserver.conf
-  service.running:
-    - name: pypiserver
-    - enabled: True
-    - require:
-      - file: /var/local/pypi/packages
-      - file: /etc/init.d/pypiserver
-      - file: /etc/default/pypiserver
