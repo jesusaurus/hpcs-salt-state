@@ -12,6 +12,11 @@ include:
     - require:
       - group: {{ pillar['pypi']['user'] }}
 
+passlib:
+  pip.installed:
+    - require:
+      - pkg: pip
+
 pypiserver:
   pip.installed:
     - require:
