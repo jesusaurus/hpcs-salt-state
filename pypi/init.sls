@@ -1,5 +1,6 @@
 include:
   - pip
+  - pypi.proxy
 
 {{ pillar['pypi']['user'] }}:
   group:
