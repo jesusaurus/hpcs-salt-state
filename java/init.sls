@@ -1,4 +1,4 @@
 java:
   pkg:
     - installed
-    - name: {{ pillar['java'] }}
+    - name: {{ pillar['package']['java'] }}

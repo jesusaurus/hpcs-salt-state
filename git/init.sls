@@ -1,4 +1,4 @@
 git:
   pkg:
     - installed
-    - name: {{ pillar['git'] }}
+    - name: {{ pillar['package']['git'] }}
