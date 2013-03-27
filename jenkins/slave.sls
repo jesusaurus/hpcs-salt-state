@@ -23,6 +23,8 @@ jenkins:
 build_env:
   pkg.installed:
     - name: maven
+  pkg.installed:
+    - name: python-virtualenv
   {% if grains['os_family'] == 'Debian' %}
   pkg.installed:
     - name: build-essential
