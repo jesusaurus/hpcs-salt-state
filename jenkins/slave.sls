@@ -1,4 +1,5 @@
 include:
+  - git
   - java
 
 jenkins:
