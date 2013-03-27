@@ -13,3 +13,5 @@ base:
     - jenkins.msgaas
   'dbaas*.jenkins*':
     - jenkins.dbaas
+  'pypi*':
+    - pypi

@@ -1,3 +1,3 @@
 ssh:
   pkg.installed:
-    - name: {{ pillar['ssh'] }}
+    - name: {{ pillar['package']['ssh'] }}

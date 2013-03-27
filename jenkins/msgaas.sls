@@ -4,7 +4,7 @@ include:
 
 java_sdk:
   pkg.installed:
-    - name: {{ pillar['java_sdk'] }}
+    - name: {{ pillar['package']['java_sdk'] }}
 
 /home/jenkins/.m2:
   file.directory:
