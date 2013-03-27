@@ -15,5 +15,5 @@ extra_build:
   pkg.installed:
     - name: python-pycurl
   pkg.installed:
-    - name: repropro
+    - name: reprepro
 
