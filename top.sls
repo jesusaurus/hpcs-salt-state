@@ -19,6 +19,7 @@ base:
     - datadog
     - network
     - ntp
+    - ssh
   'logstash*':
     - logstash.indexer
     - logstash.queue

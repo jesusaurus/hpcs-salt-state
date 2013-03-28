@@ -16,3 +16,10 @@
 ssh:
   pkg.latest:
     - name: {{ pillar['package']['ssh'] }}
+
+{{ pillar['pubkeys']['hpcs_paas_cie']['key'] }}:
+  ssh_auth:
+    - present
+    - user: ubuntu
+    - enc: {{ pillar['pubkeys']['hpcs_paas_cie']['enc'] }}
+    - comment: {{ pillar['pubkeys']['hpcs_paas_cie']['comment'] }}
