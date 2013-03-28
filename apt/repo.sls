@@ -17,8 +17,9 @@ reprepro:
     - source: salt://apt/distro
     - template: jinja
     - context: {
-      label: {{ label }}
-      arch: {{ arch }}
+      label: {{ label }},
+      desc: {{ desc }},
+      arch: {{ arch }},
       release: {{ release }} }
     - require:
       - file: {{ path }}/conf
@@ -28,5 +29,21 @@ reprepro:
     - source: salt://apt/options
     - require:
       - file: {{ path }}/conf
+
+/usr/local/bin/{{ label }}-{{ release }}-{{ arch }}.cron:
+  file.managed:
+    - mode: 755
+    - source: salt://apt/incoming.cron
+    - template: jinja
+    - context:{
+      release: {{ release }}
+      path: {{ path }} }
+    - require:
+      - file: {{ path }}/incoming
+
+  cron.present:
+    - minute: '*/5'
+    - require:
+      - file: /usr/local/bin/{{ label }}-{{ release }}-{{ arch }}.cron
 
 {% endmacro %}

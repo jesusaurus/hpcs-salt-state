@@ -1,0 +1,36 @@
+#!/bin/sh
+
+INCOMING={{ path }}/incoming
+
+#
+# Make sure we're in the apt/ directory
+#
+cd {{ path }}
+
+#
+#  Now import each new package that we *did* find
+#
+for i in $INCOMING/*.changes; do
+
+  # Import package to 'sarge' distribution.
+  reprepro -Vb . include {{ release }} $i
+
+  # Delete the referenced files
+  sed '1,/Files:/d' $i | sed '/BEGIN PGP SIGNATURE/,$d' \
+       | while read MD SIZE SECTION PRIORITY NAME; do
+
+      if [ -z "$NAME" ]; then
+           continue
+      fi
+
+      #
+      #  Delete the referenced file
+      #
+      if [ -f "$INCOMING/$NAME" ]; then
+          rm "$INCOMING/$NAME"  || exit 1
+      fi
+  done
+
+  # Finally delete the .changes file itself.
+  rm  $i
+done
