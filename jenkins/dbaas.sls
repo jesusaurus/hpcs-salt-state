@@ -17,3 +17,10 @@ extra_build:
   pkg.installed:
     - name: reprepro
 
+/home/jenkins/.pypirc:
+  file.managed:
+    - user: jenkins
+    - mode: 600
+    - source: salt://jenkins/dbaas-pypirc
+    - template: jinja
+

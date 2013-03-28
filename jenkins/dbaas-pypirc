@@ -1,0 +1,8 @@
+[distutils]
+index-servers =
+    paas-pypi
+
+[paas-pypi]
+repository: {{ pillar['dbaas']['pypi']['repo'] }}
+username: {{ pillar['dbaas']['pypi']['user'] }}
+password: {{ pillar['dbaas']['pypi']['pass'] }}
