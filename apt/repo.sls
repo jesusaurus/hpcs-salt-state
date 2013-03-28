@@ -39,6 +39,11 @@ reprepro:
     - require:
       - file: {{ path }}/conf
 
+'reprepro --silent update':
+  cron.present:
+    - minute: 0
+    - hour: 0
+
 /usr/local/bin/{{ label }}-{{ release }}-{{ arch }}.cron:
   file.managed:
     - mode: 755
