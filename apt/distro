@@ -1,0 +1,6 @@
+Origin: {{ pillar['apt']['origin'] }}
+Label: {{ label }}
+Codename: {{ release }}
+Architectures: {{ arch }}
+Components: main
+Description: {{ desc }}
