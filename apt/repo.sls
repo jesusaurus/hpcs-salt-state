@@ -24,6 +24,15 @@ reprepro:
     - require:
       - file: {{ path }}/conf
 
+{{ path }}/conf/updates:
+  file.managed:
+    - source: salt://apt/updates
+    - template: jinja
+    - context: {
+      arch: {{ arch }} }
+    - require:
+      - file: {{ path }}/conf
+
 {{ path }}/conf/options:
   file.managed:
     - source: salt://apt/options

@@ -1,0 +1,4 @@
+Name: {{ pillar['apt']['update'] }}
+Method: {{ pillar['apt']['upstream'] }}
+Architectures: {{ arch }}
+Components: main

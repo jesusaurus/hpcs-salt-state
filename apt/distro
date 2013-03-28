@@ -4,3 +4,4 @@ Codename: {{ release }}
 Architectures: {{ arch }}
 Components: main
 Description: {{ desc }}
+Update: {{ pillar['apt']['update'] }}
