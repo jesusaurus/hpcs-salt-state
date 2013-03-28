@@ -35,8 +35,8 @@ reprepro:
     - mode: 755
     - source: salt://apt/incoming.cron
     - template: jinja
-    - context:{
-      release: {{ release }}
+    - context: {
+      release: {{ release }},
       path: {{ path }} }
     - require:
       - file: {{ path }}/incoming

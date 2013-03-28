@@ -11,8 +11,8 @@ extend:
     - source: salt://nginx/server.conf
     - template: jinja
     - context: {
-      site: {{ site }}
-      port: {{ port }}
+      site: {{ site }},
+      port: {{ port }},
       path: {{ path }} }
 
 {% endmacro %}

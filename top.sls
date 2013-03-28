@@ -15,3 +15,5 @@ base:
     - jenkins.dbaas
   'pypi*':
     - pypi
+  'apt*':
+    - apt.server
