@@ -12,7 +12,6 @@ cd {{ path }}
 #
 for i in $INCOMING/*.changes; do
 
-  # Import package to 'sarge' distribution.
   reprepro -Vb . include {{ release }} $i
 
   # Delete the referenced files
