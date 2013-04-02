@@ -13,7 +13,7 @@
 #    License for the specific language governing permissions and limitations       
 #    under the License.
 #
-{% macro server(site, port, path) %}
+{% macro server(site, host, port, path) %}
 
 extend:
   nginx:
@@ -27,6 +27,7 @@ extend:
     - template: jinja
     - context: {
       site: {{ site }},
+      host: {{ host }},
       port: {{ port }},
       path: {{ path }} }
 
