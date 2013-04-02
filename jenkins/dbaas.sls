@@ -39,3 +39,10 @@ extra_build:
     - source: salt://jenkins/dbaas-pypirc
     - template: jinja
 
+/var/lib/jenkins/dbaas-dev-az2.pem:
+  file:
+    - exists
+
+/var/lib/jenkins/dbaas-instance.pem:
+  file:
+    - exists
