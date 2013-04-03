@@ -1,7 +1,7 @@
-{% for _release in release %}
+{% for release in releases %}
 Origin: {{ pillar['apt']['origin'] }}
 Label: {{ label }}
-Codename: {{ _release }}
+Codename: {{ release }}
 Architectures: {{ arch }}
 Components: {{ component }}
 Description: {{ desc }}

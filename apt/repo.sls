@@ -17,7 +17,7 @@ reprepro:
   pkg:
     - installed
 
-{% macro repo(label, desc, release, arch, component, path) %}
+{% macro repo(label, desc, releases, arch, component, path) %}
 
 {% for name in [ 'dists', 'indices', 'pool', 'project' ] %}
 
@@ -41,7 +41,7 @@ reprepro:
       desc: {{ desc }},
       arch: {{ arch }},
       component: {{ component }},
-      release: {{ release }} }
+      releases: {{ releases }} }
     - require:
       - file: {{ path }}/conf
 
@@ -65,13 +65,13 @@ reprepro:
     - minute: 0
     - hour: 0
 
-/usr/local/bin/{{ label }}-{{ release }}-update.cron:
+/usr/local/bin/{{ label }}-{{ releases }}-update.cron:
   file.managed:
     - mode: 755
     - source: salt://apt/incoming.cron
     - template: jinja
     - context: {
-      release: {{ release }},
+      releases: {{ releases }},
       path: {{ path }} }
     - require:
       - file: {{ path }}/incoming
@@ -79,6 +79,6 @@ reprepro:
   cron.present:
     - minute: '*/5'
     - require:
-      - file: /usr/local/bin/{{ label }}-{{ release }}-update.cron
+      - file: /usr/local/bin/{{ label }}-{{ releases }}-update.cron
 
 {% endmacro %}
