@@ -13,7 +13,7 @@
 #    License for the specific language governing permissions and limitations       
 #    under the License.
 #
-{% macro server(site, host, port, path) %}
+{% macro server(site, host, port, path, index=False) %}
 
 extend:
   nginx:
@@ -29,6 +29,7 @@ extend:
       site: {{ site }},
       host: {{ host }},
       port: {{ port }},
-      path: {{ path }} }
+      path: {{ path }},
+      index: {{ index }} }
 
 {% endmacro %}
