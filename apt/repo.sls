@@ -65,20 +65,4 @@ reprepro:
     - minute: 0
     - hour: 0
 
-/usr/local/bin/{{ label }}-{{ releases }}-update.cron:
-  file.managed:
-    - mode: 755
-    - source: salt://apt/incoming.cron
-    - template: jinja
-    - context: {
-      releases: {{ releases }},
-      path: {{ path }} }
-    - require:
-      - file: {{ path }}/incoming
-
-  cron.present:
-    - minute: '*/5'
-    - require:
-      - file: /usr/local/bin/{{ label }}-{{ releases }}-update.cron
-
 {% endmacro %}
