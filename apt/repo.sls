@@ -17,7 +17,7 @@ reprepro:
   pkg:
     - installed
 
-{% macro repo(label, desc, release, arch, path) %}
+{% macro repo(label, desc, release, arch, component, path) %}
 
 {% for name in [ 'dists', 'indices', 'pool', 'project' ] %}
 
@@ -40,6 +40,7 @@ reprepro:
       label: {{ label }},
       desc: {{ desc }},
       arch: {{ arch }},
+      component: {{ component }},
       release: {{ release }} }
     - require:
       - file: {{ path }}/conf
