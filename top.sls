@@ -32,3 +32,5 @@ base:
     - pypi
   'apt*':
     - apt.server
+  'devstack':
+    - devstack
