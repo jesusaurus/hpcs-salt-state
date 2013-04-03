@@ -19,6 +19,7 @@ devstack:
 /tmp/devstack/localrc:
   file.managed:
     - source: salt://devstack/localrc
+    - template: jinja
     - require:
       - git: devstack
 
