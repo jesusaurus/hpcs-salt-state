@@ -19,13 +19,18 @@ reprepro:
 
 {% macro repo(label, desc, release, arch, path) %}
 
-{% for name in [ 'conf', 'dists', 'indices', 'pool', 'project' ] %}
+{% for name in [ 'dists', 'indices', 'pool', 'project' ] %}
 
 {{ path }}/{{ name }}:
   file.directory:
     - makedirs: True
 
 {% endfor %}
+
+{{ path }}/conf:
+  file.directory:
+    - makedirs: True
+    - mode: 750
 
 {{ path }}/conf/distributions:
   file.managed:
@@ -54,7 +59,7 @@ reprepro:
     - require:
       - file: {{ path }}/conf
 
-'reprepro --silent update':
+'reprepro --silent -b {{ path }} update':
   cron.present:
     - minute: 0
     - hour: 0
