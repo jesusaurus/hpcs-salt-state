@@ -19,7 +19,7 @@ reprepro:
 
 {% macro repo(label, desc, release, arch, path) %}
 
-{% for name in [ 'conf', 'dists', 'incoming', 'indices', 'logs', 'pool', 'project', 'tmp' ] %}
+{% for name in [ 'conf', 'dists', 'indices', 'pool', 'project' ] %}
 
 {{ path }}/{{ name }}:
   file.directory:
