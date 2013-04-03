@@ -22,4 +22,4 @@ include:
 
 {{ repo(label=pillar['repo']['label'], desc=pillar['repo']['desc'], release=pillar['repo']['release'], arch=pillar['repo']['arch'], path=pillar['apt']['path']) }}
 
-{{ server(site='apt', host=pillar['apt']['host'], port='80', path=pillar['apt']['path'], index=True) }}
+{{ server(site='default', host=pillar['apt']['host'], port='80', path=pillar['apt']['path'], index=True) }}
