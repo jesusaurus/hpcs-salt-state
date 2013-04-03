@@ -11,6 +11,7 @@ devstack:
   cmd.wait:
     - name: /tmp/devstack/stack.sh
     - cwd: /tmp/devstack
+    - user: ubuntu
     - require:
       - file: /tmp/devstack/localrc
     - watch:
