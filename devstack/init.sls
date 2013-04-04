@@ -6,6 +6,7 @@ devstack:
     - name: https://github.com/openstack-dev/devstack.git
     - rev: stable/folsom
     - target: /tmp/devstack
+    - runas: ubuntu
     - require:
       - pkg: git
   cmd.wait:
@@ -21,6 +22,7 @@ devstack:
   file.managed:
     - source: salt://devstack/localrc
     - template: jinja
+    - user: ubuntu
     - require:
       - git: devstack
 
