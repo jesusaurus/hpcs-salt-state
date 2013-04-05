@@ -5,27 +5,22 @@ devstack:
   git.latest:
     - name: https://github.com/openstack-dev/devstack.git
     - rev: stable/folsom
-    - target: {{ pillar['devstack']['path'] }}
+    - target: /tmp/devstack
     - runas: ubuntu
     - force: True
     - require:
       - pkg: git
-      - file: {{ pillar['devstack']['path'] }}
   cmd.wait:
-    - name: {{ pillar['devstack']['path'] }}/stack.sh
-    - cwd: {{ pillar['devstack']['path'] }}
+    - name: /tmp/devstack/stack.sh
+    - cwd: /tmp/devstack
     - user: ubuntu
     - require:
-      - file: {{ pillar['devstack']['path'] }}/localrc
-      - file: {{ pillar['devstack']['path'] }}/local.sh
+      - file: /tmp/devstack/localrc
+      - file: /tmp/devstack/local.sh
     - watch:
       - git: devstack
 
-{{ pillar['devstack']['path'] }}:
-  file.directory:
-    - user: ubuntu
-
-{{ pillar['devstack']['path'] }}/localrc:
+/tmp/devstack/localrc:
   file.managed:
     - source: salt://devstack/localrc
     - template: jinja
@@ -33,7 +28,7 @@ devstack:
     - require:
       - git: devstack
 
-{{ pillar['devstack']['path'] }}/local.sh:
+/tmp/devstack/local.sh:
   file.managed:
     - source: salt://devstack/local.sh
     - template: jinja
