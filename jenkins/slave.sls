@@ -28,13 +28,17 @@ jenkins:
     - present
 
 {{ pillar['pubkeys']['jenkins_master']['key'] }}:
-  ssh_auth:
-    - present
+  ssh_auth.present:
     - user: jenkins
     - enc: {{ pillar['pubkeys']['jenkins_master']['enc'] }}
     - comment: {{ pillar['pubkeys']['jenkins_master']['comment'] }}
     - require:
       - user: jenkins
+
+git.paas.hpcloud.net:
+  ssh_known_hosts.present:
+    - user: jenkins
+    - fingerprint: 'de:8e:45:ae:08:f0:73:fb:b1:ff:23:c9:84:d7:f9:75'
 
 build_env:
   pkg.installed:
