@@ -15,6 +15,7 @@
 #
 include:
   - jenkins.slave
+  - pip
 
 extra_build:
   pkg.installed:
@@ -31,6 +32,10 @@ extra_build:
     - name: python-pycurl
   pkg.installed:
     - name: reprepro
+  pip.installed:
+    - name: tox
+    - require:
+      - pkg: pip
 
 /home/jenkins/.pypirc:
   file.managed:
