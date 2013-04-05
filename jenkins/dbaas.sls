@@ -19,7 +19,7 @@ include:
 
 extra_build:
   pkg.installed:
-    pkgs:
+    - pkgs:
       - bc
       - debhelper
       - libmysqlclient-dev
