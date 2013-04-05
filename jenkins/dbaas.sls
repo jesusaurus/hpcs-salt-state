@@ -17,33 +17,16 @@ include:
   - jenkins.slave
   - pip
 
-bc:
-  pkg:
-    - installed
-
-debhelper:
-  pkg:
-    - installed
-
-libmysqlclient-dev:
-  pkg:
-    - installed
-
-libxslt1-dev:
-  pkg:
-    - installed
-
-python-pexpect:
-  pkg:
-    - installed
-
-python-pycurl:
-  pkg:
-    - installed
-
-reprepro:
-  pkg:
-    - installed
+extra_build:
+  pkg.installed:
+    pkgs:
+      - bc
+      - debhelper
+      - libmysqlclient-dev
+      - libxslt1-dev
+      - python-pexpect
+      - python-pycurl
+      - reprepro
 
 tox:
   pip.installed:

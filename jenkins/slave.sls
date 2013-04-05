@@ -36,42 +36,21 @@ jenkins:
     - require:
       - user: jenkins
 
-java_sdk:
+build_env:
   pkg.installed:
-    - name: {{ pillar['package']['java_sdk'] }}
-maven:
-  pkg:
-    - installed
-python-virtualenv:
-  pkg:
-    - installed
+    - pkgs:
+      - {{ pillar['package']['java_sdk'] }}
+      - maven
+      - python-virtualenv
 {% if grains['os_family'] == 'Debian' %}
-build-essential:
-  pkg:
-    - installed
-python-dev:
-  pkg:
-    - installed
+      - build-essential
+      - python-dev
 {% elif grains['os_family'] == 'RedHat' %}
-python-devel:
-  pkg:
-    - installed
-gcc:
-  pkg:
-    - installed
-gcc-c++:
-  pkg:
-    - installed
-make:
-  pkg:
-    - installed
-autoconf:
-  pkg:
-    - installed
-pkgconfig:
-  pkg:
-    - installed
-libtool:
-  pkg:
-    - installed
+      - python-devel
+      - gcc
+      - gcc-c++
+      - make
+      - autoconf
+      - pkgconfig
+      - libtool
 {% endif %}
