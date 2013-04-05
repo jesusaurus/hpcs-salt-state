@@ -35,7 +35,7 @@ java_sdk:
     - group: jenkins
     - mode: 640
     - template: jinja
-    - source: salt://jenkins/msgaas-settings.xml
+    - source: salt://jenkins/m2-settings.xml
     - require:
       - user: jenkins
       - file: /home/jenkins/.m2
