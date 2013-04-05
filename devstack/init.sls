@@ -7,8 +7,10 @@ devstack:
     - rev: stable/folsom
     - target: {{ pillar['devstack']['path'] }}
     - runas: ubuntu
+    - force: True
     - require:
       - pkg: git
+      - file: {{ pillar['devstack']['path'] }}
   cmd.wait:
     - name: {{ pillar['devstack']['path'] }}/stack.sh
     - cwd: {{ pillar['devstack']['path'] }}
@@ -18,6 +20,10 @@ devstack:
       - file: {{ pillar['devstack']['path'] }}/local.sh
     - watch:
       - git: devstack
+
+{{ pillar['devstack']['path'] }}:
+  file.directory:
+    - user: ubuntu
 
 {{ pillar['devstack']['path'] }}/localrc:
   file.managed:
