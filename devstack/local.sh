@@ -51,5 +51,5 @@ nova secgroup-add-rule default icmp -1 -1 0.0.0.0/0
 
 # Upload some base images
 # -----------------------
-glance image-create --name ubuntu --disk-format=qcow2 --container-format=bare --file ${TOP_DIR}/precise.img
-glance image-create --name fedora --disk-format=qcow2 --container-format=bare --file ${TOP_DIR}/f17.img
+glance image-create --name ubuntu --disk-format=qcow2 --container-format=bare --file {{ pillar['devstack']['path'] }}/precise.img
+glance image-create --name fedora --disk-format=qcow2 --container-format=bare --file {{ pillar['devstack']['path'] }}/f17.img
