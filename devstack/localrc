@@ -15,3 +15,7 @@ ENABLED_SERVICES=g-api,g-reg,key,n-api,n-crt,n-obj,n-cpu,n-sch,horizon,mysql,rab
 VERBOSE=True
 FIXED_RANGE=172.20.0.0/24
 FIXED_NETWORK_SIZE=256
+
+DEST={{ pillar['devstack']['path'] }}
+HOST_IP={{ pillar['devstack']['ip'] }}
+SERVICE_HOST={{ pillar['devstack']['ip'] }}
