@@ -41,7 +41,7 @@ devstack:
 {{ pillar['devstack']['path'] }}/precise.img:
   file.managed:
     - source: http://uec-images.ubuntu.com/precise/current/precise-server-cloudimg-amd64-disk1.img
-    - source_hash: md5=38116cb5ea396e51d6b36e27f01dd156
+    - source_hash: md5=d95bfd5a57a9b752a6d97e18465ce765
     - user: ubuntu
     - require:
       - git: devstack
