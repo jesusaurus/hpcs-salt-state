@@ -20,6 +20,6 @@ include:
 {% from "apt/repo.sls" import repo %}
 {% from "nginx/server.sls" import server %}
 
-{{ repo(label=pillar['repo']['label'], desc=pillar['repo']['desc'], releases=['precise','precise-security'], arch='i386 amd64 source', component='main universe', path=pillar['apt']['path']) }}
+{{ repo(label=pillar['repo']['label'], desc=pillar['repo']['desc'], releases=['precise','precise-security', 'precise-updates'], arch='i386 amd64 source', component='main', path=pillar['apt']['path']) }}
 
 {{ server(site='default', host=pillar['apt']['host'], port='80', path=pillar['apt']['path'], index=True) }}
