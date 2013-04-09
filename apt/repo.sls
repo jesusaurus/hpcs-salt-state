@@ -50,7 +50,8 @@ reprepro:
     - source: salt://apt/updates
     - template: jinja
     - context: {
-      arch: {{ arch }} }
+      arch: {{ arch }},
+      component: {{ component }} }
     - require:
       - file: {{ path }}/conf
 
@@ -60,7 +61,7 @@ reprepro:
     - require:
       - file: {{ path }}/conf
 
-'reprepro --silent -b {{ path }} update':
+'reprepro --silent --basedir {{ path }} update':
   cron.present:
     - minute: 0
     - hour: 0
