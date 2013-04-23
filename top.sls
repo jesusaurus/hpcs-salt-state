@@ -16,6 +16,7 @@
 base:
   '*':
     - fail2ban
+    - datadog
   'logstash*':
     - logstash.indexer
     - logstash.web
