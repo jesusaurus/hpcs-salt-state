@@ -30,6 +30,7 @@ logstash:
 /mnt/logstash/logstash.jar:
   file.managed:
     - source: http://logstash.objects.dreamhost.com/release/logstash-1.1.9-monolithic.jar
+    - source_hash: md5=70addd3ccd37e796f473fe5647c31126
     - user: logstash
     - group: logstash
     - require:
