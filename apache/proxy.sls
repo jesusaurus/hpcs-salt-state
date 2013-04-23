@@ -16,14 +16,14 @@
 {% macro proxy(site, server, port, http=True, https=False) -%}
 
 extend:
-  {{ pillar['package']['apache'] }}:
+  apache2:
     service:
       - watch:
-        - file: /etc/{{ pillar['package']['apache'] }}/sites-enabled/{{ site }}
+        - file: /etc/apache2/sites-enabled/{{ site }}
 
-/etc/{{ pillar['package']['apache'] }}/sites-enabled/{{ site }}:
+/etc/apache2/sites-enabled/{{ site }}:
   file.managed:
-    - source: salt://{{ pillar['package']['apache'] }}/proxy.conf
+    - source: salt://apache/proxy.conf
     - template: jinja
     - context: {
       site: {{ site }},
@@ -33,16 +33,16 @@ extend:
       https: {{ https }} }
     {% if https -%}
     - require:
-      - file: /var/lib/{{ pillar['package']['apache'] }}/ssl/{{ site }}.proxy.crt
-      - file: /var/lib/{{ pillar['package']['apache'] }}/ssl/{{ site }}.proxy.key
+      - file: /var/lib/apache2/ssl/{{ site }}.proxy.crt
+      - file: /var/lib/apache2/ssl/{{ site }}.proxy.key
     {%- endif %}
 
 {% if https -%}
-/var/lib/{{ pillar['package']['apache'] }}/ssl/{{ site }}.proxy.crt:
+/var/lib/apache2/ssl/{{ site }}.proxy.crt:
   file:
     - exists
 
-/var/lib/{{ pillar['package']['apache'] }}/ssl/{{ site }}.proxy.key:
+/var/lib/apache2/ssl/{{ site }}.proxy.key:
   file:
     - exists
 {%- endif %}
