@@ -28,6 +28,7 @@ datadog:
       - pkgrepo: datadog
   service.running:
     - enabled: True
+    - name: datadog-agent
     - require:
       - pkg: datadog
     - watch:
