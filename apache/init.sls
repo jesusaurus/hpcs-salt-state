@@ -13,38 +13,12 @@
 #    License for the specific language governing permissions and limitations       
 #    under the License.
 #
-{% macro proxy(site, server, port, http=True, https=False) -%}
+include:
+  - fail2ban.apache
 
-extend:
-  nginx:
-    service:
-      - watch:
-        - file: /etc/nginx/sites-enabled/{{ site }}
+{{ pillar['package']['apache'] }}:
+  pkg:
+    - installed
+  service:
+    - running
 
-/etc/nginx/sites-enabled/{{ site }}:
-  file.managed:
-    - source: salt://nginx/proxy.conf
-    - template: jinja
-    - context: {
-      site: {{ site }},
-      server: {{ server }},
-      port: {{ port }},
-      http: {{ http }},
-      https: {{ https }} }
-    {% if https -%}
-    - require:
-      - file: /var/lib/nginx/ssl/{{ site }}.proxy.crt
-      - file: /var/lib/nginx/ssl/{{ site }}.proxy.key
-    {%- endif %}
-
-{% if https -%}
-/var/lib/nginx/ssl/{{ site }}.proxy.crt:
-  file:
-    - exists
-
-/var/lib/nginx/ssl/{{ site }}.proxy.key:
-  file:
-    - exists
-{%- endif %}
-
-{%- endmacro %}

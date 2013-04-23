@@ -16,14 +16,14 @@
 {% macro proxy(site, server, port, http=True, https=False) -%}
 
 extend:
-  nginx:
+  {{ pillar['package']['apache'] }}:
     service:
       - watch:
-        - file: /etc/nginx/sites-enabled/{{ site }}
+        - file: /etc/{{ pillar['package']['apache'] }}/sites-enabled/{{ site }}
 
-/etc/nginx/sites-enabled/{{ site }}:
+/etc/{{ pillar['package']['apache'] }}/sites-enabled/{{ site }}:
   file.managed:
-    - source: salt://nginx/proxy.conf
+    - source: salt://{{ pillar['package']['apache'] }}/proxy.conf
     - template: jinja
     - context: {
       site: {{ site }},
@@ -33,16 +33,16 @@ extend:
       https: {{ https }} }
     {% if https -%}
     - require:
-      - file: /var/lib/nginx/ssl/{{ site }}.proxy.crt
-      - file: /var/lib/nginx/ssl/{{ site }}.proxy.key
+      - file: /var/lib/{{ pillar['package']['apache'] }}/ssl/{{ site }}.proxy.crt
+      - file: /var/lib/{{ pillar['package']['apache'] }}/ssl/{{ site }}.proxy.key
     {%- endif %}
 
 {% if https -%}
-/var/lib/nginx/ssl/{{ site }}.proxy.crt:
+/var/lib/{{ pillar['package']['apache'] }}/ssl/{{ site }}.proxy.crt:
   file:
     - exists
 
-/var/lib/nginx/ssl/{{ site }}.proxy.key:
+/var/lib/{{ pillar['package']['apache'] }}/ssl/{{ site }}.proxy.key:
   file:
     - exists
 {%- endif %}

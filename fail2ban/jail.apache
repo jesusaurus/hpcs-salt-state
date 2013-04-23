@@ -1,0 +1,28 @@
+#
+# HTTP servers
+#
+
+[apache]
+
+enabled  = true
+port     = http,https
+filter   = apache-auth
+logpath  = /var/log/apache*/*error.log
+maxretry = 6
+
+[apache-noscript]
+
+enabled  = true
+port     = http,https
+filter   = apache-noscript
+logpath  = /var/log/apache*/*error.log
+maxretry = 6
+
+[apache-overflows]
+
+enabled  = true
+port     = http,https
+filter   = apache-overflows
+logpath  = /var/log/apache*/*error.log
+maxretry = 3
+
