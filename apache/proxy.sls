@@ -33,16 +33,16 @@ extend:
       https: {{ https }} }
     {% if https -%}
     - require:
-      - file: /var/lib/apache2/ssl/{{ site }}.proxy.crt
-      - file: /var/lib/apache2/ssl/{{ site }}.proxy.key
+      - file: /etc/ssl/certs/{{ site }}.proxy.crt
+      - file: /etc/ssl/private/{{ site }}.proxy.key
     {%- endif %}
 
 {% if https -%}
-/var/lib/apache2/ssl/{{ site }}.proxy.crt:
+/etc/ssl/certs/{{ site }}.proxy.crt:
   file:
     - exists
 
-/var/lib/apache2/ssl/{{ site }}.proxy.key:
+/etc/ssl/private/{{ site }}.proxy.key:
   file:
     - exists
 {%- endif %}
