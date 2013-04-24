@@ -16,8 +16,9 @@
 
 {% for mod in [ 'proxy', 'proxy_http', 'ssl' ] %}
 a2enmod {{ mod }}:
-  cmd:
-    - run
+  cmd.run:
+    - require:
+      - pkg: apache2
 {% endfor %}
 
 {% macro proxy(site, server, port, http=True, https=False) -%}
