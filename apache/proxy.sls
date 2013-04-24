@@ -13,14 +13,11 @@
 #    License for the specific language governing permissions and limitations       
 #    under the License.
 #
+
 {% for mod in [ 'proxy', 'proxy_http', 'ssl' ] %}
-{% for type in [ 'load', 'conf' ] %}
-/etc/apache2/mods-enabled/{{ mod }}.{{ type }}:
-  file.symlink:
-    - target: /etc/apache2/mods-available/{{ mod }}.{{ type }}
-    - watch_in:
-      - service: apache2
-{% endfor %}
+a2enmod {{ mod }}:
+  cmd:
+    - run
 {% endfor %}
 
 {% macro proxy(site, server, port, http=True, https=False) -%}
