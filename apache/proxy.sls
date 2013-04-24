@@ -14,9 +14,11 @@
 #    under the License.
 #
 {% for mod in [ 'proxy', 'ssl' ] %}
-/etc/apache2/mods-enabled/{{ mod }}.load:
+{% for type in [ 'load', 'conf' ] %}
+/etc/apache2/mods-enabled/{{ mod }}.{{ type }}:
   file.symlink:
-    - target: /etc/apache2/mods-available/{{ mod }}.load
+    - target: /etc/apache2/mods-available/{{ mod }}.{{ type }}
+{% endfor %}
 {% endfor %}
 
 {% macro proxy(site, server, port, http=True, https=False) -%}
