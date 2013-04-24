@@ -15,8 +15,37 @@
 #
 include:
   - apache
-  - apache.proxy
 
-{% from "apache/proxy.sls" import proxy %}
+{% for mod in [ 'proxy', 'proxy_http', 'rewrite', 'ssl' ] %}
+a2enmod {{ mod }}:
+  cmd.run:
+    - require:
+      - pkg: apache2
+{% endfor %}
 
-{{ proxy(site='kibana', server='127.0.0.1', port='5601', http=True, https=True) }}
+/etc/apache2/sites-enabled/000-default:
+  file:
+    - absent
+
+/etc/apache2/sites-enabled/default:
+  file.managed:
+    - source: salt://kibana/apache.conf
+    - template: jinja
+    - require:
+      - file: /etc/ssl/certs/kibana.proxy.crt
+      - file: /etc/ssl/private/kibana.proxy.key
+      - file: /var/www/openid/index.html
+    - watch_in:
+      - service: apache2
+
+/var/www/openid/index.html:
+  file.managed:
+    - source: salt://kibana/login.html
+
+/etc/ssl/certs/kibana.proxy.crt:
+  file:
+    - exists
+
+/etc/ssl/private/kibana.proxy.key:
+  file:
+    - exists

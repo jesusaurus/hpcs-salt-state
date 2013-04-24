@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Logging you via Launchpad SSO</title>
+        <style type="text/css">
+body { font-family: sans-serif; font-size: 10pt; color: black; background-color: white; }
+h1 { height: 32px; }
+#errorMessage { border-left: 3px solid red; padding: 5px; margin: 10px 0; }
+.hidden { display: none; }
+.displayed { display: block; }
+        </style>
+    </head>
+    <body>
+        <h1>OpenID Login</h1>
+        <div id="errorMessage" class="hidden"></div>
+        <form action="/" method="GET">
+            <input type="hidden" name="openid_identifier"
+            value="https://login.launchpad.net">
+            <input id="sb" type="submit"
+            value="Log in using Launchpad SSO">
+        </form>
+        <script type="text/javascript">
+            function parseQueryString() {
+                var param = {}
+                var loc = location.href;
+ 
+                var qs_loc = loc.indexOf('?');
+                if (qs_loc > -1) {
+                    var sep = loc.indexOf(';') == -1 ? '&' : ';';
+                    var pairs = loc.substring(qs_loc+1).split(sep);
+                    for (var i=0; i < pairs.length; i++) {
+                        var kv = pairs[i].split('=');
+                        param[kv[0]] = kv[1];
+                    }
+                }
+ 
+                return param;
+            }
+ 
+            function showError(message) {
+                var d = document.getElementById('errorMessage');
+                d.innerHTML = 'Error: ' + message;
+                d.className = 'displayed';
+            }
+ 
+            var qs = parseQueryString();
+ 
+            if (qs['modauthopenid.referrer']) {
+                document.getElementsByTagName('form')[0].action =
+                    decodeURIComponent(qs['modauthopenid.referrer']);
+            }
+ 
+            if (qs['modauthopenid.error']) {
+                showError(qs['modauthopenid.error']);
+            }
+            else {
+                document.getElementById('sb').className='hidden';
+                document.getElementsByTagName('form')[0].submit();
+            }
+        </script>
+    </body>
+</html>
