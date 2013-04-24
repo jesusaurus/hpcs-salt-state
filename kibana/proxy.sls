@@ -15,6 +15,7 @@
 #
 include:
   - apache
+  - apache.proxy
 
 {% from "apache/proxy.sls" import proxy %}
 
