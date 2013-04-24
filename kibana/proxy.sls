@@ -23,6 +23,16 @@ a2enmod {{ mod }}:
       - pkg: apache2
 {% endfor %}
 
+a2enmod authopenid:
+  cmd.run:
+    - require:
+      - pkg: apache2
+      - pkg: libapache2-mod-auth-openid
+
+libapache2-mod-auth-openid:
+  pkg:
+    - installed
+
 /etc/apache2/sites-enabled/000-default:
   file:
     - absent
