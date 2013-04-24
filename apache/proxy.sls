@@ -14,7 +14,7 @@
 #    under the License.
 #
 
-{% for mod in [ 'proxy', 'proxy_http', 'ssl' ] %}
+{% for mod in [ 'proxy', 'proxy_http', 'rewrite', 'ssl' ] %}
 a2enmod {{ mod }}:
   cmd.run:
     - require:
