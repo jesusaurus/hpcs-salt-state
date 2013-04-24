@@ -18,17 +18,12 @@
 /etc/apache2/mods-enabled/{{ mod }}.{{ type }}:
   file.symlink:
     - target: /etc/apache2/mods-available/{{ mod }}.{{ type }}
+    - watch_in:
+      - service: apache2
 {% endfor %}
 {% endfor %}
 
 {% macro proxy(site, server, port, http=True, https=False) -%}
-
-extend:
-  apache2:
-    service:
-      - watch:
-        - file: /etc/apache2/sites-enabled/{{ site }}
-
 /etc/apache2/sites-enabled/{{ site }}:
   file.managed:
     - source: salt://apache/proxy.conf
@@ -44,6 +39,8 @@ extend:
       - file: /etc/ssl/certs/{{ site }}.proxy.crt
       - file: /etc/ssl/private/{{ site }}.proxy.key
     {%- endif %}
+    - watch_in:
+      - service: apache2
 
 {% if https -%}
 /etc/ssl/certs/{{ site }}.proxy.crt:
