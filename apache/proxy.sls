@@ -13,7 +13,7 @@
 #    License for the specific language governing permissions and limitations       
 #    under the License.
 #
-{% for mod in [ 'proxy', 'ssl' ] %}
+{% for mod in [ 'proxy', 'proxy_http', 'ssl' ] %}
 {% for type in [ 'load', 'conf' ] %}
 /etc/apache2/mods-enabled/{{ mod }}.{{ type }}:
   file.symlink:
