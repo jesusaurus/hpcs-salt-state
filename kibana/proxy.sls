@@ -30,8 +30,13 @@ a2enmod authopenid:
       - pkg: libapache2-mod-auth-openid
 
 libapache2-mod-auth-openid:
-  pkg:
-    - installed
+  pkg.latest:
+    - require:
+      - pkgrepo: authopenid
+
+authopenid:
+  pkgrepo.managed:
+    - ppa: rye/ppa
 
 /etc/apache2/sites-enabled/000-default:
   file:
