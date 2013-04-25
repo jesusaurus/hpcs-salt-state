@@ -14,6 +14,5 @@
 #    under the License.
 #
 git:
-  pkg:
-    - installed
+  pkg.latest:
     - name: {{ pillar['package']['git'] }}

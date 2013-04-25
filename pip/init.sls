@@ -14,5 +14,5 @@
 #    under the License.
 #
 pip:
-  pkg.installed:
+  pkg.latest:
     - name: python-pip

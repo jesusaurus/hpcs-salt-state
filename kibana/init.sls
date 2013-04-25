@@ -18,8 +18,7 @@ include:
   - git
 
 bundler:
-  gem:
-    - installed
+  gem.installed:
     - require:
       - pkg: rubygems
 

@@ -15,7 +15,7 @@
 #
 reprepro:
   pkg:
-    - installed
+    - latest
 
 {% macro repo(label, desc, releases, arch, component, path) %}
 

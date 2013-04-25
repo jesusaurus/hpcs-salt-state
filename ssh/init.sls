@@ -14,5 +14,5 @@
 #    under the License.
 #
 ssh:
-  pkg.installed:
+  pkg.latest:
     - name: {{ pillar['package']['ssh'] }}

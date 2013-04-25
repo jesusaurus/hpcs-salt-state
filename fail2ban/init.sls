@@ -15,7 +15,7 @@
 #
 fail2ban:
   pkg:
-    - installed
+    - latest
   service.running:
     - watch:
       - file: fail2ban.conf

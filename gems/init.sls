@@ -15,4 +15,4 @@
 #
 rubygems:
   pkg:
-    - installed
+    - latest

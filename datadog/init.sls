@@ -22,7 +22,7 @@ datadog:
     - keyserver: keyserver.ubuntu.com
     - keyid: C7A7DA52
 {% endif %}
-  pkg.installed:
+  pkg.latest:
     - name: datadog-agent
     - require:
       - pkgrepo: datadog

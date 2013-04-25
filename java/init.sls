@@ -14,6 +14,5 @@
 #    under the License.
 #
 java:
-  pkg:
-    - installed
+  pkg.latest:
     - name: {{ pillar['package']['java'] }}
