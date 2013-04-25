@@ -13,41 +13,10 @@
 #    License for the specific language governing permissions and limitations       
 #    under the License.
 #
+include:
+  - apache
 
-{% for mod in [ 'proxy', 'proxy_http', 'rewrite', 'ssl' ] %}
-a2enmod {{ mod }}:
+a2enmod proxy:
   cmd.run:
     - require:
-      - pkg: apache2
-{% endfor %}
-
-{% macro proxy(site, server, port, http=True, https=False) -%}
-/etc/apache2/sites-enabled/{{ site }}:
-  file.managed:
-    - source: salt://apache/proxy.conf
-    - template: jinja
-    - context: {
-      site: {{ site }},
-      server: {{ server }},
-      port: {{ port }},
-      http: {{ http }},
-      https: {{ https }} }
-    {% if https -%}
-    - require:
-      - file: /etc/ssl/certs/{{ site }}.proxy.crt
-      - file: /etc/ssl/private/{{ site }}.proxy.key
-    {%- endif %}
-    - watch_in:
-      - service: apache2
-
-{% if https -%}
-/etc/ssl/certs/{{ site }}.proxy.crt:
-  file:
-    - exists
-
-/etc/ssl/private/{{ site }}.proxy.key:
-  file:
-    - exists
-{%- endif %}
-
-{%- endmacro %}
+      - pkg: {{ pillar['package']['apache'] }}

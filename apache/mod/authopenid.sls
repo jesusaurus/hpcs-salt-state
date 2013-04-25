@@ -13,37 +13,20 @@
 #    License for the specific language governing permissions and limitations       
 #    under the License.
 #
-include:
-  - apache
-  - apache.mod.authopenid
-  - apache.mod.proxy
-  - apache.mod.proxy_http
-  - apache.mod.rewrite
-  - apache.mod.ssl
 
-/etc/apache2/sites-enabled/000-default:
-  file:
-    - absent
-
-/etc/apache2/sites-enabled/default:
-  file.managed:
-    - source: salt://kibana/apache.conf
-    - template: jinja
+a2enmod authopenid:
+  cmd.run:
     - require:
-      - file: /etc/ssl/certs/kibana.proxy.crt
-      - file: /etc/ssl/private/kibana.proxy.key
-      - file: /var/www/openid/index.html
-    - watch_in:
-      - service: {{ pillar['package']['apache'] }}
+      - pkg: {{ pillar['package']['apache'] }}
+      - pkg: {{ pillar['package']['authopenid'] }}
 
-/var/www/openid/index.html:
-  file.managed:
-    - source: salt://kibana/login.html
+{{ pillar['package']['authopenid'] }}:
+  pkg.latest:
+    - require:
+{% if grains['os'] == 'Ubuntu' %}
+      - pkgrepo: authopenid
 
-/etc/ssl/certs/kibana.proxy.crt:
-  file:
-    - exists
-
-/etc/ssl/private/kibana.proxy.key:
-  file:
-    - exists
+authopenid:
+  pkgrepo.managed:
+    - ppa: rye/ppa
+{% endif %}
