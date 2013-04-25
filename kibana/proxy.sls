@@ -53,10 +53,6 @@ authopenid:
     - watch_in:
       - service: apache2
 
-/var/www/index.html:
-  file.managed:
-    - source: salt://kibana/redirect.html
-
 /var/www/openid/index.html:
   file.managed:
     - source: salt://kibana/login.html
