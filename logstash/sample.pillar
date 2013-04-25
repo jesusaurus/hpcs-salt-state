@@ -1,0 +1,4 @@
+redis:
+  server: redis.example.com
+  port: 6379
+  password: secret

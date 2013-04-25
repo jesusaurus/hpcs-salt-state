@@ -1,0 +1,6 @@
+pypi:
+  user: pypi
+  home: /opt/pypi
+  host: 127.0.0.1
+  port: 8080
+  path: /opt/pypi/cache

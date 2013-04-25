@@ -1,0 +1,10 @@
+apt:
+  host: apt
+  origin: MyRepo
+  path: /mnt/apt
+  update: ubuntu-mirror
+  upstream: http://ubuntu.osuosl.org/ubuntu/
+
+repo:
+  label: Repo
+  desc: Private Repo

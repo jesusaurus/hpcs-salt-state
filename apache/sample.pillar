@@ -1,0 +1,5 @@
+package:
+  {% if grains['os'] == 'Ubuntu' %}
+  apache: apache2
+  authopenid: libapache2-mod-auth-openid
+  {% endif %}

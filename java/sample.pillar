@@ -1,0 +1,6 @@
+package:
+  {% if grains['os_family'] == 'Debian' %}
+  java: default-jre
+  {% else %}
+  java: java
+  {% endif %}

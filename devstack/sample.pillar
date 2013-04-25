@@ -1,0 +1,4 @@
+devstack:
+  pass: secret
+  ip: my_public_ip
+  path: /opt/devstack
