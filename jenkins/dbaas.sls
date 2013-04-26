@@ -28,6 +28,11 @@ extra_build:
       - python-pycurl
       - reprepro
 
+mysql-python:
+  pip.installed:
+    - require:
+      - pkg: pip
+
 tox:
   pip.installed:
     - require:
