@@ -3,7 +3,7 @@
         "_all": { "enabled": false },
         "_source": { "compress": true },
         "dynamic_templates": [
-            {  
+            {
                 "string_template" : {
                     "match" : "*",
                     "mapping": { "type": "string", "index": "not_analyzed" },
