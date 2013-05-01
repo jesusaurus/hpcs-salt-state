@@ -6,6 +6,7 @@ description     "kibana web instance"
 
 start on virtual-filesystems
 stop on runlevel [06]
+emits kibana-running
 
 # Respawn it if the process exits
 respawn
@@ -15,8 +16,10 @@ expect fork
 chdir /mnt/kibana/site
 
 script
-
   su -s /bin/sh -c 'exec "$0" "$@"' kibana -- /usr/bin/ruby /mnt/kibana/site/kibana.rb &
-  emit kibana-running
+end script
+
+post-start script
+  initctl emit kibana-running
 end script
 
