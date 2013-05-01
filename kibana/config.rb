@@ -36,11 +36,11 @@ module KibanaConfig
   # Format for timestamps. Defaults to mm/dd HH:MM:ss.
   # For syntax see: http://blog.stevenlevithan.com/archives/date-time-format
   # Time_format = 'isoDateTime'
-  Time_format = 'mm/dd HH:MM:ss'
+  Time_format = 'isoDateTime'
 
   # Change which fields are shown by default. Must be set as an array
   # Default_fields = ['@fields.vhost','@fields.response','@fields.request']
-  Default_fields = ['@fields.job', '@fields.build', '@message']
+  Default_fields = ['@type', '@tags', '@message']
 
   # If set to true, Kibana will use the Highlight feature of Elasticsearch to
   # display highlighted search results
