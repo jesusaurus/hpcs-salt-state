@@ -11,16 +11,14 @@ emits logstash-indexer-running
 # Respawn it if the process exits
 respawn
 respawn limit 5 30
-expect fork
 
 # You need to chdir somewhere writable because logstash needs to unpack a few
 # temporary files on startup.
 chdir /mnt/logstash
 
-script
-  # This runs logstash indexer as the 'logstash' user
-  su -s /bin/sh -c 'exec "$0" "$@"' logstash -- /usr/bin/java -jar logstash.jar agent -f /etc/logstash/indexer.conf --log /var/log/logstash/indexer.log &
-end script
+# This runs logstash indexer as the 'logstash' user
+setuid logstash
+exec /usr/bin/java -jar /mnt/logstash/logstash.jar agent -f /etc/logstash/indexer.conf --log /var/log/logstash/indexer.log
 
 post-start script
   initctl emit logstash-indexer-running
