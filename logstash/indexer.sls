@@ -31,12 +31,22 @@ include:
     - require:
       - file: /etc/logstash
 
+{{ pillar['lumberjack']['cert'] }}:
+  file:
+    - exists
+
+{{ pillar['lumberjack']['key'] }}:
+  file:
+    - exists
+
 logstash-indexer:
   service.running:
     - require:
       - file: /etc/init/logstash-indexer.conf
       - file: /etc/logstash/indexer.conf
       - file: /var/log/logstash
+      - file: {{ pillar['lumberjack']['cert'] }}
+      - file: {{ pillar['lumberjack']['key'] }}
     - watch:
       - file: /etc/logstash/indexer.conf
       - file: /etc/init/logstash-indexer.conf
