@@ -32,12 +32,12 @@ include:
       - file: /etc/logstash
 
 {{ pillar['lumberjack']['cert'] }}:
-  file:
-    - exists
+  file.exists:
+    - user: logstash
 
 {{ pillar['lumberjack']['key'] }}:
-  file:
-    - exists
+  file.exists:
+    - user: logstash
 
 logstash-indexer:
   service.running:

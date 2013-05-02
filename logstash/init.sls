@@ -22,6 +22,8 @@ logstash:
     - shell: /bin/nologin
     - system: True
     - gid_from_name: True
+    - groups:
+      - ssl-cert
     - require:
       - group: logstash
   group.present:
