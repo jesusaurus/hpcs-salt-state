@@ -19,7 +19,7 @@ include:
 logstash:
   user.present:
     - home: /mnt/logstash
-    - shell: /bin/nologin
+    - shell: /bin/bash
     - system: True
     - gid_from_name: True
     - groups:
