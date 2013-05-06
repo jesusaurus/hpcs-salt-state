@@ -1,0 +1,25 @@
+# logstash - indexer instance
+#
+# Copied from http://cookbook.logstash.net/recipes/using-upstart/
+
+description     "logstash indexer instance"
+
+start on logstash-indexer-running
+stop on runlevel [06]
+emits logstash-queue-running
+
+# Respawn it if the process exits
+respawn
+respawn limit 5 30
+
+# You need to chdir somewhere writable because logstash needs to unpack a few
+# temporary files on startup.
+chdir /mnt/logstash
+
+# This runs logstash indexer as the 'logstash' user
+setuid logstash
+exec /usr/bin/java -jar /mnt/logstash/logstash.jar agent -f /etc/logstash/queue.conf --log /var/log/logstash/queue.log
+
+post-start script
+  initctl emit logstash-queue-running
+end script

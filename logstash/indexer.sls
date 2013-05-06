@@ -31,25 +31,15 @@ include:
     - require:
       - file: /etc/logstash
 
-{{ pillar['lumberjack']['cert'] }}:
-  file.exists:
-    - user: logstash
-
-{{ pillar['lumberjack']['key'] }}:
-  file.exists:
-    - user: logstash
-
 logstash-indexer:
   service.running:
     - require:
       - file: /etc/init/logstash-indexer.conf
       - file: /etc/logstash/indexer.conf
       - file: /var/log/logstash
-      - file: {{ pillar['lumberjack']['cert'] }}
-      - file: {{ pillar['lumberjack']['key'] }}
     - watch:
       - file: /etc/logstash/indexer.conf
       - file: /etc/init/logstash-indexer.conf
       - service: elasticsearch
-      - service: redis
+      - service: redis-server
   

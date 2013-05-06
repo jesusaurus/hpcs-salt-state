@@ -19,6 +19,7 @@ base:
     - datadog
   'logstash*':
     - logstash.indexer
+    - logstash.queue
     - logstash.web
     - redis
     - redis.jenkins
