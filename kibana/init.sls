@@ -49,7 +49,6 @@ kibana:
       - file: /mnt/kibana/site/KibanaConfig.rb
     - watch:
       - git: kibana
-      - file: /mnt/kibana/site/KibanaConfig.rb
   service.running:
     - require:
       - file: /etc/init/kibana.conf
