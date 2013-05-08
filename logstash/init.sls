@@ -31,8 +31,8 @@ logstash:
 
 /mnt/logstash/logstash.jar:
   file.managed:
-    - source: http://logstash.objects.dreamhost.com/release/logstash-1.1.10-flatjar.jar
-    - source_hash: md5=0177b73539a22b42f95611393cb566b1
+    - source: http://logstash.objects.dreamhost.com/release/logstash-1.1.12-flatjar.jar
+    - source_hash: md5=fd793a685bc8e4d255fbce561574faef
     - user: logstash
     - group: logstash
     - require:
