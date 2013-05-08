@@ -20,7 +20,7 @@ elasticsearch:
   pkg:
     - installed
     - sources: 
-      - elasticsearch: http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.20.2.deb
+      - elasticsearch: http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.0.deb
   service.running:
     - require:
       - pkg: java
