@@ -16,14 +16,6 @@
 include:
   - git
 
-/mnt/redis:
-  file.directory:
-    - user: redis
-    - group: redis
-    - require:
-      - user: redis
-      - group: redis
-
 redis:
   user.present:
     - home: /mnt/redis
@@ -32,6 +24,22 @@ redis:
       - group: redis
   group:
     - present
+
+/mnt/redis:
+  file.directory:
+    - user: redis
+    - group: redis
+    - require:
+      - user: redis
+      - group: redis
+
+/var/lib/redis:
+  file.directory:
+    - user: redis
+    - group: redis
+    - require:
+      - user: redis
+      - group: redis
 
 https://github.com/antirez/redis.git:
   git.latest:
@@ -42,7 +50,7 @@ https://github.com/antirez/redis.git:
       - pkg: git
       - file: /mnt/redis
 
-redis:
+redis-install:
   cmd.wait:
     - name: 'make && make PREFIX=/usr install' 
     - cwd: /mnt/redis/src
@@ -55,7 +63,7 @@ redis-server:
     - require:
       - file: /etc/init.d/redis-server
     - watch:
-      - cmd: redis
+      - cmd: redis-install
       - file: /etc/redis/redis.conf
 
 /etc/init.d/redis-server:
