@@ -17,8 +17,21 @@ include:
   - git
 
 /mnt/redis:
-  file:
-    - directory
+  file.directory:
+    - user: redis
+    - group: redis
+    - require:
+      - user: redis
+      - group: redis
+
+redis:
+  user.present:
+    - home: /mnt/redis
+    - gid_from_name: True
+    - require:
+      - group: redis
+  group:
+    - present
 
 https://github.com/antirez/redis.git:
   git.latest:
