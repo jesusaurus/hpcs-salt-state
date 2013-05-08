@@ -13,14 +13,34 @@
 #    License for the specific language governing permissions and limitations       
 #    under the License.
 #
+include:
+  - git
+
+/mnt/redis:
+  file:
+    - directory
+
+https://github.com/antirez/redis.git:
+  git.latest:
+    - rev: 2.6.13
+    - force: True
+    - target: /mnt/redis/src
+    - require:
+      - pkg: git
+      - file: /mnt/redis
+
+redis:
+  cmd.wait:
+    - name: 'make && make PREFIX=/usr install' 
+    - cwd: /mnt/redis/src
+    - watch:
+      - git: https://github.com/antirez/redis.git
+
 redis-server:
-  pkg:
-    - installed
   service:
     - running
-    - require:
-      - pkg: redis-server
     - watch:
+      - cmd: redis
       - file: /etc/redis/redis.conf
 
 /etc/redis/redis.conf:
@@ -30,5 +50,3 @@ redis-server:
     - user: root
     - group: root
     - mode: 0644
-    - require:
-      - pkg: redis-server
