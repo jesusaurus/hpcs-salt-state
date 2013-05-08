@@ -39,9 +39,15 @@ redis:
 redis-server:
   service:
     - running
+    - require:
+      - file: /etc/init.d/redis-server
     - watch:
       - cmd: redis
       - file: /etc/redis/redis.conf
+
+/etc/init.d/redis-server:
+  file.managed:
+    - source: salt://redis/redis.init
 
 /etc/redis/redis.conf:
   file.managed:
