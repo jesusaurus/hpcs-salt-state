@@ -20,4 +20,4 @@ discovery.zen:
   minimum_master_nodes: 1
   ping:
     multicast.enabled: false
-    unicast.hosts: ["172.0.0.1"]
+    unicast.hosts: ["127.0.0.1"]
