@@ -14,42 +14,19 @@
 #    under the License.
 #
 include:
-  - java
+  - elasticsearch
 
-elasticsearch:
-  pkg:
-    - installed
-    - sources: 
-      - elasticsearch: http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.0.deb
-  service.running:
-    - require:
-      - pkg: java
-      - pkg: elasticsearch
-      - file: /mnt/elasticsearch
-      - file: /var/log/elasticsearch
-    - watch:
-      - file: /etc/elasticsearch/elasticsearch.yml
-      - file: /etc/elasticsearch/default_mapping.json
-
-/mnt/elasticsearch:
-  file.directory:
-    - user: elasticsearch
-    - group: elasticsearch
-    - require:
-      - pkg: elasticsearch
-
-/var/log/elasticsearch:
-  file.directory:
-    - user: elasticsearch
-    - group: elasticsearch
-    - require:
-      - pkg: elasticsearch
-
-/etc/elasticsearch/default_mapping.json:
+/etc/elasticsearch/elasticsearch.yml:
   file.managed:
-    - source: salt://elasticsearch/default_mapping.json
+    - source: salt://elasticsearch/elasticsearch.yml
     - user: root
     - group: root
     - mode: 0644
+    - template: jinja
+    - context: {
+      master: false,
+      data: true,
+      refresh: 5s }
     - require:
       - pkg: elasticsearch
+

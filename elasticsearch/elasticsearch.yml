@@ -1,6 +1,6 @@
 node:
-  master: true
-  data: true
+  master: {{ master }}
+  data: {{ data }}
 
 path:
   conf: /etc/elasticsearch
@@ -24,4 +24,4 @@ discovery.zen:
   minimum_master_nodes: 1
   ping:
     multicast.enabled: false
-    unicast.hosts: ["127.0.0.1"]
+    unicast.hosts: [ "logstash.paas.hpcloud.net", "127.0.0.1" ]

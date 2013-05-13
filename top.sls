@@ -23,7 +23,9 @@ base:
     - logstash.web
     - redis
     - redis.jenkins
-    - elasticsearch
+    - elasticsearch.master
+  'esnode*':
+    - elasticsearch.data-slave
   'jenkins.*':
     - jenkins.master
   'msgaas*.jenkins*':
