@@ -42,4 +42,3 @@ logstash-indexer:
       - file: /etc/init/logstash-indexer.conf
       - service: elasticsearch
       - service: redis-server
-  

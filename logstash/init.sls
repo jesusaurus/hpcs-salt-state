@@ -55,3 +55,7 @@ logstash:
     - require:
       - user: logstash
       - group: logstash
+
+/etc/logrotate.d/logstash:
+  file.managed:
+    - source: salt://logstash/logrotate.conf
