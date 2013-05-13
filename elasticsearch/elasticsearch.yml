@@ -8,13 +8,17 @@ path:
   logs: /var/log/elasticsearch
 
 index:
-  number_of_shards: 1
+  number_of_shards: 5
   number_of_replicas: 0
   query.default_field: "@message"
+  refresh_interval: 5s
   store:
     compress:
       stored: true
       tv: true
+    throttle:
+      type: merge
+      max_bytes_per_sec: 3mb
 
 discovery.zen:
   minimum_master_nodes: 1
