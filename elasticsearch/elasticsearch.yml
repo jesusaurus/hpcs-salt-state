@@ -8,8 +8,8 @@ path:
   logs: /var/log/elasticsearch
 
 index:
-  number_of_shards: 5
-  number_of_replicas: 0
+  number_of_shards: {{ pillar['elasticsearch']['shards'] }}
+  number_of_replicas: {{ pillar['elasticsearch']['replicas'] }}
   query.default_field: "@message"
   refresh_interval: 5s
   store:
@@ -24,4 +24,7 @@ discovery.zen:
   minimum_master_nodes: 1
   ping:
     multicast.enabled: false
-    unicast.hosts: [ "logstash.paas.hpcloud.net", "127.0.0.1" ]
+    unicast.hosts:
+{% for host in pillar['elasticsearch']['masters'] %}
+      - {{ host }}
+{% endfor %}
