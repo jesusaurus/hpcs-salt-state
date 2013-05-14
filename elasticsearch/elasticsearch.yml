@@ -20,11 +20,13 @@ index:
       type: merge
       max_bytes_per_sec: 3mb
 
+network.publish_host: {{ pillar['elasticsearch']['publish'][grains['host']] }}
+
 discovery.zen:
   minimum_master_nodes: 1
   ping:
     multicast.enabled: false
     unicast.hosts:
-{% for host in pillar['elasticsearch']['masters'] %}
+{%- for host in pillar['elasticsearch']['masters'] %}
       - {{ host }}
-{% endfor %}
+{%- endfor %}
