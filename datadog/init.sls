@@ -34,7 +34,14 @@ datadog:
     - watch:
       - file: /etc/dd-agent/datadog.conf
 
-/etc/dd-agent/datadog.conf.exmaple:
+{% if pillar.get('redis', false) %}
+python-redis:
+  pkg.latest:
+    - require-in:
+      - service: datadog
+{% endif %}
+
+/etc/dd-agent/datadog.conf.example:
   file.managed:
     - source: salt://datadog/datadog.conf.example
 
