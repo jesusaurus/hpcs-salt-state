@@ -20,6 +20,11 @@ index:
       type: merge
       max_bytes_per_sec: 3mb
 
+cluster.routing.allocation:
+  cluster_concurrent_rebalance: 4                                                                                                                                                                                 -  allow_rebalance: indices_primaries_active
+  allow_rebalance: indices_primaries_active
+  node_concurrent_recoveries: 3
+
 network:
   publish_host: {{ pillar['elasticsearch']['publish'][grains['host']] }}
   tcp.keep_alive: true
