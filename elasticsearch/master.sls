@@ -25,7 +25,7 @@ include:
     - template: jinja
     - context: {
       master: true,
-      data: true,
+      data: false,
       refresh: 5s }
     - require:
       - pkg: elasticsearch
