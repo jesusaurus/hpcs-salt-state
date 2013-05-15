@@ -21,7 +21,7 @@ index:
       max_bytes_per_sec: 3mb
 
 cluster.routing.allocation:
-  cluster_concurrent_rebalance: 4                                                                                                                                                                                 -  allow_rebalance: indices_primaries_active
+  cluster_concurrent_rebalance: 4
   allow_rebalance: indices_primaries_active
   node_concurrent_recoveries: 3
 
