@@ -32,13 +32,13 @@ include:
     - require:
       - file: /etc/ssl/certs/kibana.proxy.crt
       - file: /etc/ssl/private/kibana.proxy.key
-      - file: /var/www/openid/index.html
+      - file: /var/www/kibana.htpasswd
     - watch_in:
       - service: {{ pillar['package']['apache'] }}
 
-/var/www/openid/index.html:
-  file.managed:
-    - source: salt://kibana/login.html
+/var/www/kibana.htpasswd:
+  file:
+    - exists
 
 /etc/ssl/certs/kibana.proxy.crt:
   file:
