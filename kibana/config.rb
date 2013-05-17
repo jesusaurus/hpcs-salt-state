@@ -63,7 +63,7 @@ module KibanaConfig
 
   # When using analyze, use this many of the most recent
   # results for user's query
-  Analyze_limit = 2000
+  Analyze_limit = 10000
 
   # Show this many results in analyze/trend/terms/stats modes
   Analyze_show = 25
@@ -113,7 +113,7 @@ module KibanaConfig
   # Kibana will use for the "Stats" and "Terms" to prevent ES crashes. For very
   # large data sets and undersized ES clusers, a limit of 1 is not unreasonable.
   # Default is 0 (unlimited)
-  Facet_index_limit = 3
+  Facet_index_limit = 2
 
   # You probably don't want to touch anything below this line
   # unless you really know what you're doing
