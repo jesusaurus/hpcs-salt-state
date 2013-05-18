@@ -16,9 +16,8 @@ index:
     compress:
       stored: true
       tv: true
-    throttle:
-      type: merge
-      max_bytes_per_sec: 3mb
+
+indices.memory.index_buffer_size: "33%"
 
 cluster.routing.allocation:
   cluster_concurrent_rebalance: 4
