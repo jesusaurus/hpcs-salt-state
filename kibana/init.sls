@@ -36,6 +36,7 @@ kibana:
   git.latest:
     - name: https://github.com/rashidkpc/Kibana.git
     - rev: v0.2.0
+    - force: True
     - target: /mnt/kibana/site
     - runas: kibana
     - require:
@@ -70,6 +71,7 @@ kibana:
     - require:
       - user: kibana
       - group: kibana
+    - watch:
       - git: kibana
 
 /etc/init/kibana.conf:
