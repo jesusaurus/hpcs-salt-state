@@ -24,7 +24,7 @@ h1 { height: 32px; }
             function parseQueryString() {
                 var param = {}
                 var loc = location.href;
- 
+
                 var qs_loc = loc.indexOf('?');
                 if (qs_loc > -1) {
                     var sep = loc.indexOf(';') == -1 ? '&' : ';';
@@ -34,23 +34,23 @@ h1 { height: 32px; }
                         param[kv[0]] = kv[1];
                     }
                 }
- 
+
                 return param;
             }
- 
+
             function showError(message) {
                 var d = document.getElementById('errorMessage');
                 d.innerHTML = 'Error: ' + message;
                 d.className = 'displayed';
             }
- 
+
             var qs = parseQueryString();
- 
+
             if (qs['modauthopenid.referrer']) {
                 document.getElementsByTagName('form')[0].action =
                     decodeURIComponent(qs['modauthopenid.referrer']);
             }
- 
+
             if (qs['modauthopenid.error']) {
                 showError(qs['modauthopenid.error']);
             }
