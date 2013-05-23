@@ -28,7 +28,7 @@ include:
         path=pillar['apt']['path']) }}
 
 {{ server(site='default',
-          host=pillar['apt']['host'],
+          host='0.0.0.0',
           port='80',
           path=pillar['apt']['path'],
           index=True) }}
