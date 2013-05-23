@@ -62,6 +62,7 @@ redis-server:
     - running
     - require:
       - file: /etc/init.d/redis-server
+      - file: /var/log/redis
     - watch:
       - cmd: redis-install
       - file: /etc/redis/redis.conf
@@ -69,6 +70,7 @@ redis-server:
 /etc/init.d/redis-server:
   file.managed:
     - source: salt://redis/redis.init
+    - mode: 755
 
 /etc/redis/redis.conf:
   file.managed:
@@ -77,3 +79,10 @@ redis-server:
     - user: root
     - group: root
     - mode: 0644
+
+/var/log/redis:
+  file.directory:
+    - user: redis
+    - group: redis
+    - require:
+      - user: redis
