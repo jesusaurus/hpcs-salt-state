@@ -13,10 +13,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
-reprepro:
-  pkg:
-    - latest
-
+include:
+  - apt
 {% macro repo(label, desc, releases, arch, component, path) %}
 
 {% for name in [ 'dists', 'indices', 'pool', 'project' ] %}
