@@ -34,7 +34,7 @@ reprepro:
 
 {{ path }}/conf/distributions:
   file.managed:
-    - source: salt://apt/distro
+    - source: salt://apt/repo/distro
     - template: jinja
     - context: {
       label: {{ label }},
@@ -47,7 +47,7 @@ reprepro:
 
 {{ path }}/conf/updates:
   file.managed:
-    - source: salt://apt/updates
+    - source: salt://apt/repo/updates
     - template: jinja
     - context: {
       arch: {{ arch }},
@@ -57,7 +57,7 @@ reprepro:
 
 {{ path }}/conf/options:
   file.managed:
-    - source: salt://apt/options
+    - source: salt://apt/repo/options
     - require:
       - file: {{ path }}/conf
 

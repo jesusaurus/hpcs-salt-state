@@ -35,7 +35,7 @@ base:
     - jenkins.dbaas
   'pypi*':
     - pypi
-  'apt*':
-    - apt.server
+  'apt.mirror*':
+    - apt.mirror
   'devstack':
     - devstack
