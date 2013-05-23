@@ -51,3 +51,5 @@ apt-cacher-ng:
   file.directory:
     - makedirs: True
     - user: apt-cacher-ng
+    - require:
+      - user: apt-cacher-ng
