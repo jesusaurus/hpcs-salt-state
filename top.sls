@@ -37,5 +37,7 @@ base:
     - pypi
   'apt.mirror*':
     - apt.mirror
+  'apt.dbaas*':
+    - apt.cache
   'devstack':
     - devstack
