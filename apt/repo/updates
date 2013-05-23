@@ -1,4 +1,4 @@
-Name: {{ pillar['apt']['update'] }}
-Method: {{ pillar['apt']['upstream'] }}
+Name: {{ pillar['apt']['repo']['update'] }}
+Method: {{ pillar['apt']['repo']['upstream'] }}
 Architectures: {{ arch }}
 Components: {{ component }}

@@ -1,1 +1,1 @@
-http://{{ pillar['apt']['upstream'] }}
+http://{{ pillar['apt']['cache']['upstream'] }}

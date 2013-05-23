@@ -47,7 +47,7 @@ apt-cacher-ng:
     - source: salt://apt/cache/target_urls
     - template: jinja
 
-{{ pillar['apt']['path'] }}:
+{{ pillar['apt']['cache']['path'] }}:
   file.directory:
     - makedirs: True
     - user: apt-cacher-ng
