@@ -1,10 +1,17 @@
 apt:
-  host: apt
-  origin: MyRepo
-  path: /mnt/apt
-  update: ubuntu-mirror
-  upstream: http://ubuntu.osuosl.org/ubuntu/
-
-repo:
-  label: Repo
-  desc: Private Repo
+  cache:
+    path: /var/cache/apt-cacher-ng
+    upstream: mirrors.cat.pdx.edu/ubuntu
+  repo:
+    path: /var/export/apt
+    origin: MyOrigin
+    label: MyRepo
+    desc: My local repo
+    update: my-repo
+    upstream: http://mirrors.cat.pdx.edu/ubuntu
+    releases:
+      - precise
+      - precise-updates
+      - precise-security
+    component: main universe
+    arch: i386 amd64 source
