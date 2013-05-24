@@ -25,8 +25,10 @@ base:
     - redis
     - redis.jenkins
     - elasticsearch.master
+    - openvpn.server
   'esnode*':
     - elasticsearch.data-slave
+    - openvpn.client
   'jenkins.*':
     - jenkins.master
   'msgaas*.jenkins*':
