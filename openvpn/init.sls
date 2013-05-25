@@ -17,6 +17,8 @@
 openvpn:
   pkg:
     - installed
+  service:
+    - running
 
 /etc/ssl/certs/openvpn-ca.crt:
   file:

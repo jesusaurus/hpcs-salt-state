@@ -20,3 +20,5 @@ include:
   file.managed:
     - source: salt://openvpn/client.conf
     - template: jinja
+    - watch_in:
+      - service: openvpn
