@@ -1,0 +1,6 @@
+init_config:
+
+instances:
+   -   host: localhost
+       port: {{ pillar['redis']['port'] }}
+       password: {{ pillar['redis']['password'] }}
