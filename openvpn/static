@@ -1,0 +1,1 @@
+ifconfig-push {{ ip }} {{ pillar['openvpn']['ip']['mask'] }}

@@ -26,3 +26,16 @@ include:
     - template: jinja
     - watch_in:
       - service: openvpn
+
+/etc/openvpn/static:
+  file:
+    - directory
+
+{% for cn, ip in pillar['openvpn']['clients'].iteritems() %}
+/etc/openvpn/static/{{ cn }}:
+  file.managed:
+    - source: salt://openvpn/static
+    - template: jinja
+    - context: { ip: {{ ip }} }
+
+{% endfor %}
