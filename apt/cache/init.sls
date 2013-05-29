@@ -21,11 +21,12 @@ apt-cacher-ng:
     - installed
   user:
     - present
-    - gid_from_name: True
     - require:
-      - group: apt-cacher-ng
+      - pkg: apt-cacher-ng
   group:
     - present
+    - require:
+      - pkg: apt-cacher-ng
   service.running:
     - require:
       - pkg: apt-cacher-ng
