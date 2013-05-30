@@ -15,3 +15,8 @@ apt:
       - precise-security
     component: main universe
     arch: i386 amd64 source
+  filter:
+    pkgs:
+      - pkgone install
+      - pkgtwo hold
+      - pkgthree =v1.0

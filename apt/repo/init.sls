@@ -15,7 +15,8 @@
 #
 include:
   - apt
-{% macro repo(label, desc, releases, arch, component, path, upstream) %}
+
+{% macro repo(label, desc, releases, arch, component, path, upstream, filterlist) %}
 {% set update = label + '-upstream' %}
 
 {% for name in [ 'dists', 'indices', 'pool', 'project' ] %}
@@ -71,6 +72,13 @@ include:
   cron.present:
     - minute: 0
     - hour: 0
+{% endif %}
+
+{% if filterlist %}
+{{ path }}/conf/filter.list:
+  file.managed:
+    - source: salt://apt/repo/filter.list
+    - template: jinja
 {% endif %}
 
 {% endmacro %}

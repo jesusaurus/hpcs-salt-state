@@ -2,3 +2,6 @@ Name: {{ update }}
 Method: {{ upstream }}
 Architectures: {{ arch }}
 Components: {{ component }}
+{% if filterlist -%}
+FilterList: purge filter.list
+{%- endif %}
