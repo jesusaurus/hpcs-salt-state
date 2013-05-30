@@ -40,6 +40,6 @@ base:
   'apt.mirror*':
     - apt.mirror
   'apt.dbaas*':
-    - apt.cache
+    - apt.mirror
   'devstack':
     - devstack
