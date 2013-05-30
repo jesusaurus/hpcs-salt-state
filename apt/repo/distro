@@ -1,10 +1,12 @@
-{% for release in releases %}
+{% for release in releases -%}
 Origin: {{ pillar['apt']['repo']['origin'] }}
 Label: {{ label }}
 Codename: {{ release }}
 Architectures: {{ arch }}
 Components: {{ component }}
 Description: {{ desc }}
-Update: {{ pillar['apt']['repo']['update'] }}
+{% if upstream -%}
+Update: {{ update }}
+{%- endif %}
 
 {% endfor %}

@@ -25,7 +25,8 @@ include:
         releases=pillar['apt']['repo']['releases'],
         arch=pillar['apt']['repo']['arch'],
         component=pillar['apt']['repo']['component'],
-        path=pillar['apt']['repo']['path']) }}
+        path=pillar['apt']['repo']['path'],
+        upstream=pillar['apt']['repo'].get('upstream', None)) }}
 
 {{ server(site='default',
           host='0.0.0.0',

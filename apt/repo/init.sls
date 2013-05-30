@@ -15,7 +15,8 @@
 #
 include:
   - apt
-{% macro repo(label, desc, releases, arch, component, path) %}
+{% macro repo(label, desc, releases, arch, component, path, upstream) %}
+{% set update = label + '-upstream' %}
 
 {% for name in [ 'dists', 'indices', 'pool', 'project' ] %}
 
@@ -39,23 +40,30 @@ include:
       desc: {{ desc }},
       arch: {{ arch }},
       component: {{ component }},
-      releases: {{ releases }} }
-    - require:
-      - file: {{ path }}/conf
-
-{{ path }}/conf/updates:
-  file.managed:
-    - source: salt://apt/repo/updates
-    - template: jinja
-    - context: {
-      arch: {{ arch }},
-      component: {{ component }} }
+      releases: {{ releases }},
+      update: {{ update }},
+      upstream: {{ upstream }} }
     - require:
       - file: {{ path }}/conf
 
 {{ path }}/conf/options:
   file.managed:
     - source: salt://apt/repo/options
+    - template: jinja
+    - context: { path: {{ path }} }
+    - require:
+      - file: {{ path }}/conf
+
+{% if upstream %}
+{{ path }}/conf/updates:
+  file.managed:
+    - source: salt://apt/repo/updates
+    - template: jinja
+    - context: {
+      update: {{ update }},
+      upstream: {{ upstream }},
+      arch: {{ arch }},
+      component: {{ component }} }
     - require:
       - file: {{ path }}/conf
 
@@ -63,5 +71,6 @@ include:
   cron.present:
     - minute: 0
     - hour: 0
+{% endif %}
 
 {% endmacro %}

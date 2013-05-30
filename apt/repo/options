@@ -1,2 +1,2 @@
 ask-passphrase
-basedir .
+basedir {{ path }}
