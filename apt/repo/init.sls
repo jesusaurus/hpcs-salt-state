@@ -43,7 +43,7 @@ include:
       component: {{ component }},
       releases: {{ releases }},
       update: {{ update }},
-      upstream: {{ upstream }} }
+      upstream: "{{ upstream }}" }
     - require:
       - file: {{ path }}/conf
 
@@ -62,9 +62,10 @@ include:
     - template: jinja
     - context: {
       update: {{ update }},
-      upstream: {{ upstream }},
+      upstream: "{{ upstream }}",
       arch: {{ arch }},
-      component: {{ component }} }
+      component: {{ component }},
+      filterlist: {{ filterlist }} }
     - require:
       - file: {{ path }}/conf
 
