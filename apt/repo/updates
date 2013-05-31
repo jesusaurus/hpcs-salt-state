@@ -5,3 +5,6 @@ Components: {{ component }}
 {% if filterlist -%}
 FilterList: purge filter.list
 {%- endif %}
+{% if verify -%}
+VerifyRelease: {{ verify }}
+{%- endif %}

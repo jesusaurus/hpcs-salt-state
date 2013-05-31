@@ -8,5 +8,8 @@ Description: {{ desc }}
 {% if upstream -%}
 Update: {{ update }}
 {%- endif %}
+{% if sign -%}
+SignWith: {{ sign }}
+{%- endif %}
 
 {% endfor %}

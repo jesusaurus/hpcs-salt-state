@@ -16,7 +16,7 @@
 include:
   - apt
 
-{% macro repo(label, desc, releases, arch, component, path, upstream, filterlist) %}
+{% macro repo(label, desc, releases, arch, component, path, upstream, filterlist, sign, verify) %}
 {% set update = label + '-upstream' %}
 
 {% for name in [ 'dists', 'indices', 'pool', 'project' ] %}
@@ -43,7 +43,8 @@ include:
       component: {{ component }},
       releases: {{ releases }},
       update: {{ update }},
-      upstream: "{{ upstream }}" }
+      upstream: "{{ upstream }}",
+      sign: {{ sign }} }
     - require:
       - file: {{ path }}/conf
 
@@ -65,7 +66,8 @@ include:
       upstream: "{{ upstream }}",
       arch: {{ arch }},
       component: {{ component }},
-      filterlist: {{ filterlist }} }
+      filterlist: {{ filterlist }},
+      verify: {{ verify }} }
     - require:
       - file: {{ path }}/conf
 
