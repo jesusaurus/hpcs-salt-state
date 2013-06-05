@@ -57,6 +57,7 @@ elasticsearch:
 /etc/default/elasticsearch:
   file.managed:
     - source: salt://elasticsearch/elasticsearch.default
+    - template: jinja
     - user: root
     - group: root
     - mode: 0644

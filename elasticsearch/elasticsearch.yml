@@ -17,7 +17,7 @@ index:
       stored: true
       tv: true
 
-indices.memory.index_buffer_size: "33%"
+indices.memory.index_buffer_size: {{ pillar['elasticsearch']['indexsize'] }}
 
 cluster.routing.allocation:
   cluster_concurrent_rebalance: 4
