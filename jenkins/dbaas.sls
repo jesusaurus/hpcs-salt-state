@@ -38,6 +38,16 @@ tox:
     - require:
       - pkg: pip
 
+pbr:
+  pip.installed:
+    - require:
+      - pkg: pip
+
+d2to1:
+  pip.installed:
+    - require:
+      - pkg: pip
+
 /home/jenkins/.pypirc:
   file.managed:
     - user: jenkins
