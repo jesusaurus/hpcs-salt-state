@@ -4,17 +4,57 @@ apt:
     upstream: mirrors.cat.pdx.edu/ubuntu
   repo:
     path: /var/export/apt
-    origin: MyOrigin
-    label: MyRepo
-    desc: My local repo
-    update: my-repo
-    upstream: http://mirrors.cat.pdx.edu/ubuntu
-    releases:
-      - precise
-      - precise-updates
-      - precise-security
-    component: main universe
-    arch: i386 amd64 source
+    distros:
+      precise:
+        origin: Optional Origin
+        label: Optional Label
+        desc: Optional Description
+        component: main universe multiverse
+        arch: i386 amd64 source
+        pull: rabbitmq
+        update: upstream percona
+        signwith: default
+      precise-updates:
+        component: main universe multiverse
+        arch: i386 amd64 source
+        update: upstream
+        signwith: default
+      precise-security:
+        component: main universe multiverse
+        arch: i386 amd64 source
+        update: upstream-nofilter
+        signwith: default
+      testing:
+        component: main
+        arch: i386 amd64 source
+        update: rabbitmq
+    pulls:
+      rabbitmq:
+        from: testing
+    updates:
+      upstream-nofilter:
+        method: http://mirrors.cat.pdx.edu/ubuntu
+        verify: 40976EAF437D05B5
+        arch: i386 amd64 source
+        component: main universe multiverse
+      upstream:
+        method: http://mirrors.cat.pdx.edu/ubuntu
+        verify: 40976EAF437D05B5
+        arch: i386 amd64 source
+        component: main universe multiverse
+        filterlist: purge filter.list
+      percona:
+        method: http://repo.percona.com/apt/
+        verify: CD2EFD2A
+        component: main
+        arch: i386 amd64 source
+        filterlist: purge filter.list
+      rabbitmq:
+        method: http://www.rabbitmq.com/debian/
+        verify: 056E8E56
+        component: main
+        arch: i386 amd64 source
+        filterlist: purge filter.list
   filter:
     pkgs:
       - pkgone install

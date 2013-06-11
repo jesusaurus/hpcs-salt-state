@@ -17,19 +17,7 @@ include:
   - apt.repo
   - nginx
 
-{% from "apt/repo/init.sls" import repo %}
 {% from "nginx/server.sls" import server %}
-
-{{ repo(label=pillar['apt']['repo']['label'],
-        desc=pillar['apt']['repo']['desc'],
-        releases=pillar['apt']['repo']['releases'],
-        arch=pillar['apt']['repo']['arch'],
-        component=pillar['apt']['repo']['component'],
-        path=pillar['apt']['repo']['path'],
-        upstream=pillar['apt']['repo'].get('upstream', false),
-        filterlist=pillar['apt'].get('filter', false),
-        sign=pillar['apt']['repo'].get('sign', false),
-        verify=pillar['apt']['repo'].get('verify', false) ) }}
 
 {{ server(site='default',
           host='0.0.0.0',

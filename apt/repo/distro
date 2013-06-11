@@ -1,15 +1,16 @@
-{% for release in releases -%}
-Origin: {{ pillar['apt']['repo']['origin'] }}
-Label: {{ label }}
-Codename: {{ release }}
-Architectures: {{ arch }}
-Components: {{ component }}
-Description: {{ desc }}
-{% if upstream -%}
-Update: {{ update }}
-{%- endif %}
-{% if sign -%}
-SignWith: {{ sign }}
-{%- endif %}
+{% for codename, distro in pillar['apt']['repo']['distros'].iteritems() -%}
+{%- if distro.get('origin', false) %}Origin: {{ distro['origin'] }}
+{% endif %}
+{%- if distro.get('label', false) %}Label: {{ distro['label'] }}
+{% endif %}
+{%- if distro.get('desc', false) %}Description: {{ distro['desc'] }}{% endif %}
+Codename: {{ codename }}
+Architectures: {{ distro['arch'] }}
+Components: {{ distro['component'] }}
+{% if distro.get('update', false) %}Update: {{ distro['update'] }}
+{% endif %}
+{%- if distro.get('pull', false) %}Pull: {{ distro['pull'] }}
+{% endif %}
+{%- if distro.get('signwith', false) %}SignWith: {{ distro['signwith'] }}{% endif %}
 
 {% endfor %}

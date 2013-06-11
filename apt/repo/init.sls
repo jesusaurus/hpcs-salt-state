@@ -16,35 +16,18 @@
 include:
   - apt
 
-{% macro repo(label, desc, releases, arch, component, path, upstream, filterlist, sign, verify) %}
-{% set update = label + '-upstream' %}
+{% set path = pillar['apt']['repo']['path'] %}
 
-{% for name in [ 'dists', 'indices', 'pool', 'project' ] %}
-
-{{ path }}/{{ name }}:
+{% for dir in [ 'conf', 'dists', 'pool' ] %}
+{{ path }}/{{ dir }}:
   file.directory:
     - makedirs: True
-
 {% endfor %}
-
-{{ path }}/conf:
-  file.directory:
-    - makedirs: True
-    - mode: 750
 
 {{ path }}/conf/distributions:
   file.managed:
     - source: salt://apt/repo/distro
     - template: jinja
-    - context: {
-      label: {{ label }},
-      desc: {{ desc }},
-      arch: {{ arch }},
-      component: {{ component }},
-      releases: {{ releases }},
-      update: {{ update }},
-      upstream: "{{ upstream }}",
-      sign: {{ sign }} }
     - require:
       - file: {{ path }}/conf
 
@@ -52,36 +35,30 @@ include:
   file.managed:
     - source: salt://apt/repo/options
     - template: jinja
-    - context: { path: {{ path }} }
     - require:
       - file: {{ path }}/conf
 
-{% if upstream %}
+{{ path }}/conf/pulls:
+  file.managed:
+    - source: salt://apt/repo/pulls
+    - template: jinja
+    - require:
+      - file: {{ path }}/conf
+
 {{ path }}/conf/updates:
   file.managed:
     - source: salt://apt/repo/updates
     - template: jinja
-    - context: {
-      update: {{ update }},
-      upstream: "{{ upstream }}",
-      arch: {{ arch }},
-      component: {{ component }},
-      filterlist: {{ filterlist }},
-      verify: {{ verify }} }
     - require:
       - file: {{ path }}/conf
 
-'reprepro --silent --basedir {{ path }} update':
+'reprepro --silent --basedir {{ path }} update ; reprepro --silent --basedir {{ path }} pull ; reprepro --silent --basedir {{ path }} export':
   cron.present:
     - minute: 0
     - hour: 0
-{% endif %}
 
-{% if filterlist %}
 {{ path }}/conf/filter.list:
   file.managed:
     - source: salt://apt/repo/filter.list
     - template: jinja
-{% endif %}
 
-{% endmacro %}
