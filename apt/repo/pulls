@@ -1,0 +1,5 @@
+{% for name, pull in pillar['apt']['repo']['pulls'].iteritems() -%}
+Name: {{ name }}
+From: {{ pull['from'] }}
+
+{% endfor %}

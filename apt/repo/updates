@@ -1,10 +1,11 @@
-Name: {{ update }}
-Method: {{ upstream }}
-Architectures: {{ arch }}
-Components: {{ component }}
-{% if filterlist -%}
-FilterList: purge filter.list
-{%- endif %}
-{% if verify -%}
-VerifyRelease: {{ verify }}
-{%- endif %}
+{% for name, update in pillar['apt']['repo']['updates'].iteritems() -%}
+
+Name: {{ name }}
+Method: {{ update['method'] }}
+{% if update.get('verify', false) %}VerifyRelease: {{ update['verify'] }}
+{% endif -%}
+Architectures: {{ update['arch'] }}
+Components: {{ update['component'] }}
+{% if update.get('filterlist', false) %}FilterList: {{ update['filterlist'] }}{% endif %}
+
+{% endfor %}
