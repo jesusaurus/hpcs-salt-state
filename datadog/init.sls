@@ -24,8 +24,10 @@ datadog:
 {% endif %}
   pkg.latest:
     - name: datadog-agent
+{% if grains['os_family'] == 'Debian' %}
     - require:
       - pkgrepo: datadog
+{% endif %}
   service.running:
     - enabled: True
     - name: datadog-agent
