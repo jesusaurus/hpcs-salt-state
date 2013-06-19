@@ -24,12 +24,14 @@ include:
     - makedirs: True
 {% endfor %}
 
+{% if pillar['apt']['repo'].get('distros', false) %}
 {{ path }}/conf/distributions:
   file.managed:
     - source: salt://apt/repo/distro
     - template: jinja
     - require:
       - file: {{ path }}/conf
+{% endif %}
 
 {{ path }}/conf/options:
   file.managed:
@@ -38,27 +40,33 @@ include:
     - require:
       - file: {{ path }}/conf
 
+{% if pillar['apt']['repo'].get('pulls', false) %}
 {{ path }}/conf/pulls:
   file.managed:
     - source: salt://apt/repo/pulls
     - template: jinja
     - require:
       - file: {{ path }}/conf
+{% endif %}
 
+{% if pillar['apt']['repo'].get('updates', false) %}
 {{ path }}/conf/updates:
   file.managed:
     - source: salt://apt/repo/updates
     - template: jinja
     - require:
       - file: {{ path }}/conf
+{% endif %}
 
 'reprepro --silent --basedir {{ path }} update ; reprepro --silent --basedir {{ path }} pull ; reprepro --silent --basedir {{ path }} export':
   cron.present:
     - minute: 0
     - hour: 0
 
+{% if pillar['apt']['repo'].get('filter', false) %}
 {{ path }}/conf/filter.list:
   file.managed:
     - source: salt://apt/repo/filter.list
     - template: jinja
+{% endif %}
 
