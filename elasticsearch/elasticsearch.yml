@@ -1,6 +1,7 @@
 node:
   master: {% if master %}true{% else %}false{% endif %}
   data: {% if data %}true{% else %}false{% endif %}
+  zone: {{ pillar['elasticsearch']['zone'][grains['host']] }}
 
 path:
   conf: /etc/elasticsearch
@@ -20,6 +21,7 @@ index:
 indices.memory.index_buffer_size: {{ pillar['elasticsearch']['indexsize'] }}
 
 cluster.routing.allocation:
+  awareness.attributes: zone
   cluster_concurrent_rebalance: 4
   allow_rebalance: indices_primaries_active
   node_concurrent_recoveries: 3
