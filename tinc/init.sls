@@ -17,14 +17,16 @@
 tinc:
   pkg:
     - installed
-  service:
-    - running
+  service.running:
+    - require:
+      - pkg: tinc
 
 {% for network in pillar['tinc'].keys() %}
 
 /etc/tinc/{{ network }}:
-  file:
-    - directory
+  file.directory:
+    - require:
+      - pkg: tinc
 
 /etc/tinc/{{ network }}/hosts:
   file.directory:
