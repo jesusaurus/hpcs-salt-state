@@ -1,0 +1,4 @@
+Address = {{ pillar['tinc'][network]['hosts'][grains['host']]['address'] }}
+Subnet = {{ pillar['tinc'][network]['hosts'][grains['host']]['subnet'] }}
+
+{{ pillar['tinc'][network]['hosts'][grains['host']]['public'] }}

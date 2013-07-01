@@ -1,0 +1,1 @@
+{{ pillar['tinc'][network]['hosts'][grains['host']]['private'] }}

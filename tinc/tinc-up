@@ -1,0 +1,4 @@
+#!/bin/sh
+ip link set $INTERFACE up
+ip addr add {{ pillar['tinc'][network]['hosts'][grains['host']]['subnet'].split('/')[0] }}/{{ pillar['tinc'][network]['network'].split('/')[1] }} dev $INTERFACE
+ip route add {{ pillar['tinc'][network]['network'] }} dev $INTERFACE

@@ -1,0 +1,4 @@
+#!/bin/sh
+ip route del {{ pillar['tinc'][network]['network'] }} dev $INTERFACE
+ip addr del {{ pillar['tinc'][network]['hosts'][grains['host']]['subnet'].split('/')[0] }}/{{ pillar['tinc'][network]['network'].split('/')[1] }} dev $INTERFACE
+ip link set $INTERFACE down

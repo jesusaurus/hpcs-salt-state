@@ -1,0 +1,41 @@
+tinc:
+  myvpn:
+    autostart: true
+    network: 10.0.0.0/24  # vpn
+    hosts:
+      alice:  # must match `hostname`
+        interface: tun0
+        address: 192.168.0.1  # publicly routable
+        subnet: 10.0.0.1/32  # internal to vpn
+        public: |
+-----BEGIN RSA PUBLIC KEY-----
+SOMELONG
+MULTILINE
+STRING
+-----END RSA PUBLIC KEY-----
+        private: |
+-----BEGIN RSA PRIVATE KEY-----
+SOMELONG
+MULTILINE
+STRING
+-----END RSA PRIVATE KEY-----
+
+      bob:  # must match `hostname`
+        interface: tun0
+        address: 172.27.0.1  # publicly routable
+        subnet: 10.0.0.100/32  # internal to vpn
+        connect_to:
+          - 'alice'
+        public: |
+-----BEGIN RSA PUBLIC KEY-----
+SOMELONG
+MULTILINE
+STRING
+-----END RSA PUBLIC KEY-----
+        private: |
+-----BEGIN RSA PRIVATE KEY-----
+SOMELONG
+MULTILINE
+STRING
+-----END RSA PRIVATE KEY-----
+
