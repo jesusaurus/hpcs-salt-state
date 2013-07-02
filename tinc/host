@@ -1,4 +1,4 @@
-Address = {{ pillar['tinc'][network]['hosts'][grains['host']]['address'] }}
-Subnet = {{ pillar['tinc'][network]['hosts'][grains['host']]['subnet'] }}
+Address = {{ pillar['tinc'][network]['hosts'][host]['address'] }}
+Subnet = {{ pillar['tinc'][network]['hosts'][host]['subnet'] }}
 
-{{ pillar['tinc'][network]['hosts'][grains['host']]['public'] }}
+{{ pillar['tinc'][network]['hosts'][host]['public'] }}
