@@ -25,10 +25,10 @@ base:
     - redis
     - redis.jenkins
     - elasticsearch.master
-    - openvpn.server
+    - tinc
   'esnode*':
     - elasticsearch.data-slave
-    - openvpn.client
+    - tinc
   'jenkins.*':
     - jenkins.master
   'msgaas*.jenkins*':
