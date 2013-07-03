@@ -20,6 +20,12 @@ tinc:
   service.running:
     - require:
       - pkg: tinc
+      - file: /etc/init.d/tinc
+
+/etc/init.d/tinc:
+  file.managed:
+    - source: salt://tinc/tinc.d.sh
+    - mode: 755
 
 {% for network in pillar['tinc'].keys() %}
 
