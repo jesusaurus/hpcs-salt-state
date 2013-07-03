@@ -35,7 +35,4 @@ discovery.zen:
   ping_timeout: 5s
   ping:
     multicast.enabled: false
-    unicast.hosts:
-    {%- if master %} [ "127.0.0.1" ]
-    {%- else %} [ "{{ pillar['elasticsearch']['publish']['logstash'] }}" ]
-    {%- endif %}
+    unicast.hosts: [ {{ ', '.join(pillar['elasticsearch']['publish'].values()) }} ]
