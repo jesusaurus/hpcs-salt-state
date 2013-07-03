@@ -24,8 +24,6 @@ STRING
         interface: tun0
         address: 172.27.0.1  # publicly routable
         subnet: 10.0.0.100/32  # internal to vpn
-        connect_to:
-          - 'alice'
         public: |
 -----BEGIN RSA PUBLIC KEY-----
 SOMELONG
