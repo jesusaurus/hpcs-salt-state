@@ -55,6 +55,8 @@ tinc:
     - context: { network: {{ network }} }
     - require:
       - file: /etc/tinc/{{ network }}
+    - watch_in:
+      - service: tinc
 
 /etc/tinc/{{ network }}/tinc.conf:
   file.managed:
@@ -63,6 +65,8 @@ tinc:
     - context: { network: {{ network }} }
     - require:
       - file: /etc/tinc/{{ network }}
+    - watch_in:
+      - service: tinc
 
 /etc/tinc/{{ network }}/tinc-up:
   file.managed:
@@ -72,6 +76,8 @@ tinc:
     - context: { network: {{ network }} }
     - require:
       - file: /etc/tinc/{{ network }}
+    - watch_in:
+      - service: tinc
 
 /etc/tinc/{{ network }}/tinc-down:
   file.managed:
@@ -90,6 +96,8 @@ tinc:
     - context: { network: {{ network }}, host: {{ host }} }
     - require:
       - file: /etc/tinc/{{ network }}
+    - watch_in:
+      - service: tinc
 {% endfor %}
 
 {% endfor %}
