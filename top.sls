@@ -24,6 +24,7 @@ base:
     - logstash.web
     - redis
     - redis.jenkins
+  'esmaster*':
     - elasticsearch.master
     - tinc
   'esnode*':
