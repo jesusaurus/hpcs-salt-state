@@ -21,7 +21,9 @@ index:
 indices.memory.index_buffer_size: {{ pillar['elasticsearch']['indexsize'] }}
 
 cluster.routing.allocation:
-  awareness.attributes: zone
+  awareness:
+    attributes: zone
+    force.zone.values: az1,az2,az3
   cluster_concurrent_rebalance: {{ pillar['elasticsearch']['rebalance'] }}
   allow_rebalance: indices_primaries_active
   node_concurrent_recoveries: {{ pillar['elasticsearch']['recoveries'] }}

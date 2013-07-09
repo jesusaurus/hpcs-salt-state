@@ -25,8 +25,19 @@ include:
     - template: jinja
     - context: {
       master: true,
-      data: false,
-      refresh: 5s }
+      data: false }
     - require:
       - pkg: elasticsearch
 
+/etc/default/elasticsearch:
+  file.managed:
+    - source: salt://elasticsearch/elasticsearch.default
+    - user: root
+    - group: root
+    - mode: 0644
+    - template: jinja
+    - context: {
+      master: true,
+      data: false }
+    - require:
+      - pkg: elasticsearch
