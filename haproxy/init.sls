@@ -25,16 +25,24 @@ haproxy:
 /etc/rsyslog.d/10-haproxy.conf:
   file.managed:
     - source: salt://haproxy/rsyslog.d.conf
+    - require:
+      - pkg: haproxy
 
 /etc/logrotate.d/haproxy:
   file.managed:
     - source: salt://haproxy/logrotate.conf
+    - require:
+      - pkg: haproxy
 
 /etc/default/haproxy:
   file.managed:
     - source: salt://haproxy/haproxy.default
+    - require:
+      - pkg: haproxy
 
 /etc/haproxy.cfg:
   file.managed:
     - source: salt://haproxy/haproxy.cfg
+    - require:
+      - pkg: haproxy
 
