@@ -40,7 +40,7 @@ haproxy:
     - require:
       - pkg: haproxy
 
-/etc/haproxy.cfg:
+/etc/haproxy/haproxy.cfg:
   file.managed:
     - source: salt://haproxy/haproxy.cfg
     - require:
