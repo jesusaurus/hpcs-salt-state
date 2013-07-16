@@ -21,6 +21,9 @@ haproxy:
     - running
     - require:
       - pkg: haproxy
+    - watch:
+      - file: /etc/haproxy/haproxy.cfg
+      - file: /etc/default/haproxy
 
 /etc/rsyslog.d/10-haproxy.conf:
   file.managed:
@@ -43,6 +46,7 @@ haproxy:
 /etc/haproxy/haproxy.cfg:
   file.managed:
     - source: salt://haproxy/haproxy.cfg
+    - template: jinja
     - require:
       - pkg: haproxy
 
