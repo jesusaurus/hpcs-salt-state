@@ -25,7 +25,7 @@ cluster.routing.allocation:
     attributes: zone
     force.zone.values: az1,az2,az3
   cluster_concurrent_rebalance: {{ pillar['elasticsearch']['rebalance'] }}
-  allow_rebalance: indices_primaries_active
+  allow_rebalance: indices_all_active
   node_concurrent_recoveries: {{ pillar['elasticsearch']['recoveries'] }}
 
 network:
