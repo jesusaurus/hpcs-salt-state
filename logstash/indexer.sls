@@ -16,28 +16,33 @@
 include:
   - logstash
 
-/etc/init/logstash-indexer.conf:
+{% for i in ['1', '2', '3'] %}
+/etc/init/logstash-indexer{{i}}.conf:
   file.managed:
     - source: salt://logstash/indexer.init
+    - template: jinja
+    - context: { i: {{ i }} }
     - user: root
     - group: root
 
-/etc/logstash/indexer.conf:
+/etc/logstash/indexer{{i}}.conf:
   file.managed:
     - source: salt://logstash/indexer.conf
     - template: jinja
+    - context: { addr: {{ pillar['elasticsearch']['publish']['esmaster' + i] }} }
     - user: logstash
     - group: logstash
     - require:
       - file: /etc/logstash
 
-logstash-indexer:
+logstash-indexer{{i}}:
   service.running:
     - require:
-      - file: /etc/init/logstash-indexer.conf
-      - file: /etc/logstash/indexer.conf
+      - file: /etc/init/logstash-indexer{{i}}.conf
+      - file: /etc/logstash/indexer{{i}}.conf
       - file: /var/log/logstash
     - watch:
-      - file: /etc/logstash/indexer.conf
-      - file: /etc/init/logstash-indexer.conf
+      - file: /etc/logstash/indexer{{i}}.conf
+      - file: /etc/init/logstash-indexer{{i}}.conf
       - service: redis-server
+{% endfor %}
