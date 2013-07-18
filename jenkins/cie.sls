@@ -13,37 +13,21 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
-base:
-  '*':
-    - fail2ban
-    - datadog
-    - network
-  'logstash*':
-    - logstash.indexer
-    - logstash.queue
-    - logstash.web
-    - redis
-    - redis.jenkins
-    - haproxy
-  'esmaster*':
-    - elasticsearch.master
-    - tinc
-  'esnode*':
-    - elasticsearch.data-slave
-    - tinc
-  'jenkins.*':
-    - jenkins.master
-  '*.jenkins-slave':
-    - jenkins.slave
-  'msgaas*.jenkins-slave':
-    - jenkins.msgaas
-  'dbaas*.jenkins-slave':
-    - jenkins.dbaas
-  'cie*.jenkins-slave':
-    - jenkins.cie
-  'pypi*':
-    - pypi
-  'apt*':
-    - apt.mirror
-  'devstack':
-    - devstack
+include:
+  - jenkins.slave
+
+/home/jenkins/.ssh/id_rsa:
+  file.managed:
+    - user: jenkins
+    - group: jenkins
+    - mode: 0600
+    - contents: |
+      {{ pillar['jenkins_cie_private_key'] }}
+
+/home/jenkins/.ssh/id_rsa.pub:
+  file.managed:
+    - user: jenkins
+    - group: jenkins
+    - mode: 0644
+    - contents: |
+      {{ pillar['jenkins_cie_public_key'] }}
