@@ -17,8 +17,14 @@ index:
     compress:
       stored: true
       tv: true
+  routing.allocation.total_shards_per_node: {{ pillar['elasticsearch']['shards_per_node'] }}
 
 indices.memory.index_buffer_size: {{ pillar['elasticsearch']['indexsize'] }}
+
+gateway:
+  recover_after_nodes: 5
+  recover_after_time: 10m
+  expected_nodes: {{ pillar['elasticsearch']['publish'].keys()|length }}
 
 cluster.routing.allocation:
   awareness:
@@ -33,7 +39,7 @@ network:
 
 discovery.zen:
   minimum_master_nodes: 1
-  ping_timeout: 5s
+  ping_timeout: 3s
   ping:
     multicast.enabled: false
     unicast.hosts: [ {{ ', '.join(pillar['elasticsearch']['publish'].values()) }} ]
