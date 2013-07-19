@@ -21,6 +21,8 @@ include:
     - user: jenkins
     - group: jenkins
     - mode: 0600
+    - require:
+      - user: jenkins
     - contents: |
 {{ pillar['jenkins_cie_private_key']|indent(8, true) }}
 
@@ -29,5 +31,7 @@ include:
     - user: jenkins
     - group: jenkins
     - mode: 0644
+    - require:
+      - user: jenkins
     - contents: |
 {{ pillar['jenkins_cie_public_key'|indent(8, true)] }}
