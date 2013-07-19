@@ -16,6 +16,12 @@
 include:
   - jenkins.slave
 
+extend:
+  jenkins:
+    user.present:
+      - groups:
+        - sudo
+
 /home/jenkins/.ssh/id_rsa:
   file.managed:
     - user: jenkins
@@ -34,4 +40,4 @@ include:
     - require:
       - user: jenkins
     - contents: |
-{{ pillar['jenkins_cie_public_key'|indent(8, true)] }}
+{{ pillar['jenkins_cie_public_key']|indent(8, true) }}
