@@ -22,7 +22,7 @@ include:
     - group: jenkins
     - mode: 0600
     - contents: |
-      {{ pillar['jenkins_cie_private_key'] }}
+{{ pillar['jenkins_cie_private_key']|indent(8, true) }}
 
 /home/jenkins/.ssh/id_rsa.pub:
   file.managed:
@@ -30,4 +30,4 @@ include:
     - group: jenkins
     - mode: 0644
     - contents: |
-      {{ pillar['jenkins_cie_public_key'] }}
+{{ pillar['jenkins_cie_public_key'|indent(8, true)] }}
