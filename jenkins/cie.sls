@@ -16,12 +16,6 @@
 include:
   - jenkins.slave
 
-extend:
-  jenkins:
-    user.present:
-      - groups:
-        - sudo
-
 /home/jenkins/.ssh/id_rsa:
   file.managed:
     - user: jenkins
@@ -41,3 +35,10 @@ extend:
       - user: jenkins
     - contents: |
 {{ pillar['jenkins_cie_public_key']|indent(8, true) }}
+
+/etc/sudoers.d/20-jenkins:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 0440
+    - source: salt://jenkins/sudoers
