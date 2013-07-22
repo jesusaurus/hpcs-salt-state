@@ -2,7 +2,8 @@
     "logstash_settings" : {
         "template" : "logstash*",
         "settings" : {
-            "index.routing.allocation.total_shards_per_node" : "5"
+            "index.routing.allocation.total_shards_per_node" : "5",
+            "index.cache.field.type" : "soft"
         }
     }
 }

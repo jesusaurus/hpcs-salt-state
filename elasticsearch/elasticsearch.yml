@@ -18,6 +18,7 @@ index:
       stored: true
       tv: true
   routing.allocation.total_shards_per_node: {{ pillar['elasticsearch']['shards_per_node'] }}
+  cache.field.type: "soft"
 
 indices.memory.index_buffer_size: {{ pillar['elasticsearch']['indexsize'] }}
 
