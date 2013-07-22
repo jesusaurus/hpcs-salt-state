@@ -1,3 +1,3 @@
-{% for pkg in pillar['apt']['filter']['pkgs'] -%}
+{% for pkg in pillar['apt']['repo']['filter']['pkgs'] -%}
 {{ pkg }}
 {% endfor %}
