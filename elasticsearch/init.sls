@@ -28,9 +28,6 @@ elasticsearch:
       - pkg: elasticsearch
       - file: /mnt/elasticsearch
       - file: /var/log/elasticsearch
-    - watch:
-      - file: /etc/elasticsearch/elasticsearch.yml
-      - file: /etc/elasticsearch/default_mapping.json
 
 /mnt/elasticsearch:
   file.directory:
@@ -54,3 +51,8 @@ elasticsearch:
     - mode: 0644
     - require:
       - pkg: elasticsearch
+
+/etc/elasticsearch/templates/logstash.json:
+  file.managed:
+    - makedirs: true
+    - source: salt://elasticsearch/logstash-template.json
