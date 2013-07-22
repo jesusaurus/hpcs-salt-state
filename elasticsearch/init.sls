@@ -43,9 +43,9 @@ elasticsearch:
     - require:
       - pkg: elasticsearch
 
-/etc/elasticsearch/default_mapping.json:
+/etc/elasticsearch/default-mapping.json:
   file.managed:
-    - source: salt://elasticsearch/default_mapping.json
+    - source: salt://elasticsearch/default-mapping.json
     - user: root
     - group: root
     - mode: 0644
