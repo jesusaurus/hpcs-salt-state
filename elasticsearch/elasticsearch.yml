@@ -38,7 +38,7 @@ network:
   tcp.keep_alive: true
 
 discovery.zen:
-  minimum_master_nodes: 1
+  minimum_master_nodes: 2
   ping_timeout: 3s
   ping:
     multicast.enabled: false
