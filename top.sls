@@ -25,6 +25,7 @@ base:
     - redis
     - redis.jenkins
     - haproxy
+    - tinc
   'esmaster*':
     - elasticsearch.master
     - tinc
