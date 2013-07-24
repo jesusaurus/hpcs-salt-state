@@ -37,13 +37,16 @@ include:
       - service: {{ pillar['package']['apache'] }}
 
 /var/www/kibana.htpasswd:
-  file:
-    - exists
+  file.managed:
+    - contents: |
+        {{ pillar['kibana']['htpasswd'] | indent(8) }}
 
 /etc/ssl/certs/kibana.proxy.crt:
-  file:
-    - exists
+  file.managed:
+    - contents: |
+        {{ pillar['kibana']['crt'] | indent(8) }}
 
 /etc/ssl/private/kibana.proxy.key:
-  file:
-    - exists
+  file.managed:
+    - contents: |
+        {{ pillar['kibana']['key'] | indent(8) }}
