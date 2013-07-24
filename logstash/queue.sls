@@ -31,13 +31,17 @@ include:
     - require:
       - file: /etc/logstash
 
-{{ pillar['lumberjack']['cert'] }}:
-  file.exists:
+/etc/ssl/certs/logstash.crt:
+  file.managed:
     - user: logstash
+    - contents: |
+        {{ pillar['lumberjack']['crt'] | indent(8) }}
 
-{{ pillar['lumberjack']['key'] }}:
-  file.exists:
+/etc/ssl/private/logstash.key:
+  file.managed:
     - user: logstash
+    - contents: |
+        {{ pillar['lumberjack']['key'] | indent(8) }}
 
 logstash-queue:
   service.running:
@@ -45,8 +49,8 @@ logstash-queue:
       - file: /etc/init/logstash-queue.conf
       - file: /etc/logstash/queue.conf
       - file: /var/log/logstash
-      - file: {{ pillar['lumberjack']['cert'] }}
-      - file: {{ pillar['lumberjack']['key'] }}
+      - file: /etc/ssl/certs/logstash.crt
+      - file: /etc/ssl/private/logstash.key
     - watch:
       - file: /etc/logstash/queue.conf
       - file: /etc/init/logstash-queue.conf
