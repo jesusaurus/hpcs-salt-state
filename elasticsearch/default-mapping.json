@@ -14,7 +14,9 @@
     "properties" : {
       "@fields": { "type": "object", "dynamic": true, "path": "full" },
       "@timestamp": { "type": "date", "index": "not_analyzed" },
-      "@message" : { "type" : "string", "index" : "analyzed" }
+      "@message" : { "type" : "string", "index" : "analyzed" },
+      "@tags" : { "type" : "string", "index" : "analyzed" },
+      "@source_host" : { "type" : "string", "index" : "analyzed" }
     }
   }
 }
