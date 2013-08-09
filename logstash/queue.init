@@ -4,9 +4,8 @@
 
 description     "logstash indexer instance"
 
-start on logstash-indexer-running
+start on runlevel [2345]
 stop on runlevel [06]
-emits logstash-queue-running
 
 # Respawn it if the process exits
 respawn
@@ -20,7 +19,3 @@ chdir /mnt/logstash
 setuid logstash
 setgid ssl-cert
 exec /usr/bin/java -jar /mnt/logstash/logstash.jar agent -f /etc/logstash/queue.conf --log /var/log/logstash/queue.log
-
-post-start script
-  initctl emit logstash-queue-running
-end script
