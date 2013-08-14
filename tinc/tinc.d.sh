@@ -25,6 +25,8 @@ TCONF="/etc/tinc"
 NETSFILE="$TCONF/nets.boot"
 NETS=""
 
+EXTRA=" -d3" # debugging level = 3
+
 test -f $DAEMON || exit 0
 
 [ -r /etc/default/tinc ] && . /etc/default/tinc
