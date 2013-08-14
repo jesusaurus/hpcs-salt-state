@@ -18,6 +18,7 @@ chdir /mnt/logstash
 
 # This runs logstash indexer as the 'logstash' user
 setuid logstash
+setgid ssl-cert
 exec /usr/bin/java -jar /mnt/logstash/logstash.jar agent -f /etc/logstash/queue.conf --log /var/log/logstash/queue.log
 
 post-start script
