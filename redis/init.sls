@@ -72,6 +72,10 @@ redis-server:
     - source: salt://redis/redis.init
     - mode: 755
 
+/etc/redis:
+  file.directory:
+    - mode: 755
+
 /etc/redis/redis.conf:
   file.managed:
     - source: salt://redis/redis.conf
