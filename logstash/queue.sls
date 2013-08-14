@@ -35,7 +35,7 @@ include:
   file.managed:
     - user: logstash
     - contents: |
-        {{ pillar['lumberjack']['crt'] | indent(8) }}
+        {{ pillar['lumberjack']['cert'] | indent(8) }}
 
 /etc/ssl/private/logstash.key:
   file.managed:
