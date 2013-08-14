@@ -31,17 +31,17 @@ include:
     - require:
       - file: /etc/logstash
 
-/etc/ssl/certs/logstash.crt:
+{{ pillar['lumberjack']['cert'] }}:
   file.managed:
     - user: logstash
     - contents: |
-        {{ pillar['lumberjack']['cert'] | indent(8) }}
+        {{ pillar['lumberjack']['cert_contents'] | indent(8) }}
 
-/etc/ssl/private/logstash.key:
+{{ pillar['lumberjack']['key'] }}:
   file.managed:
     - user: logstash
     - contents: |
-        {{ pillar['lumberjack']['key'] | indent(8) }}
+        {{ pillar['lumberjack']['key_contents'] | indent(8) }}
 
 logstash-queue:
   service.running:
