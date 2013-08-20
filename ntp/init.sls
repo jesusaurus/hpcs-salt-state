@@ -12,40 +12,12 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-#
-base:
-  '*':
-    - fail2ban
-    - datadog
-    - network
-    - ntp
-  'logstash*':
-    - logstash.indexer
-    - logstash.queue
-    - logstash.web
-    - redis
-    - redis.jenkins
-    - haproxy
-    - tinc
-  'esmaster*':
-    - elasticsearch.master
-    - tinc
-  'esnode*':
-    - elasticsearch.data-slave
-    - tinc
-  'jenkins.*':
-    - jenkins.master
-  '*.jenkins-slave':
-    - jenkins.slave
-  'msgaas*.jenkins-slave':
-    - jenkins.msgaas
-  'dbaas*.jenkins-slave':
-    - jenkins.dbaas
-  'cie*.jenkins-slave':
-    - jenkins.cie
-  'pypi*':
-    - pypi
-  'apt*':
-    - apt.mirror
-  'devstack':
-    - devstack
+
+ntpdate:
+  pkg:
+    - installed
+
+ntpcron:
+  cron.present:
+    - minute: random
+    - name: /usr/sbin/ntpdate pool.ntp.org
