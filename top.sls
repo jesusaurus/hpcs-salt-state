@@ -47,5 +47,3 @@ base:
     - pypi
   'apt*':
     - apt.mirror
-  'devstack':
-    - devstack
