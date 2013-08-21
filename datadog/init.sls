@@ -42,7 +42,7 @@ python-redis:
     - require-in:
       - service: datadog
 
-/etc/dd/agent/conf.d/redisdb.yaml:
+/etc/dd-agent/conf.d/redisdb.yaml:
   file.managed:
     - source: salt://datadog/redisdb.yaml
     - template: jinja
@@ -51,7 +51,7 @@ python-redis:
 {% endif %}
 
 {% if pillar.get('elasticsearch', false) %}
-/etc/dd/agent/conf.d/elastic.yaml:
+/etc/dd-agent/conf.d/elastic.yaml:
   file.managed:
     - source: salt://datadog/elastic.yaml
     - template: jinja
