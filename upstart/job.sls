@@ -13,25 +13,25 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
-{% macro job(name, command, description, user=root, chdir=None, expect=None, emit=None, start_trigger=None, stop_trigger=None) %}
+{% macro job(service, command, description, user='root', chdir=None, expect=None, emit=None, start_trigger=None, stop_trigger=None) %}
 
-/etc/init/{{ name }}.conf:
+/etc/init/{{ service }}.conf:
   file.managed:
     - source: salt://upstart/job.conf
     - template: jinja
     - context: {
-      command: {{ command }},
-      description: {{ description }},
-      user: {{ user }},
-      chdir: {{ chdir }},
-      expect: {{ expect }},
-      emit: {{ emit }},
-      start_trigger: {{ start_trigger }},
-      stop_trigger: {{ stop_trigger }} }
+      command: "{{ command }}",
+      description: {{ description or false }},
+      user: {{ user or false }},
+      chdir: {{ chdir or false }},
+      expect: {{ expect or false }},
+      emit: {{ emit or false }},
+      start_trigger: {{ start_trigger or false }},
+      stop_trigger: {{ stop_trigger or false }} }
 
-{{ name }}:
+{{ service }}:
   service.running:
     - require:
-      file: /etc/init/{{ name }}.conf
+      - file: /etc/init/{{ service }}.conf
 
 {% endmacro %}
