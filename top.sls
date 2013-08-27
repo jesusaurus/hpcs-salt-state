@@ -26,6 +26,7 @@ base:
     - logstash.web
     - redis
     - redis.jenkins
+    - redis.tunnel
     - haproxy
     - tinc
   'esmaster*':
