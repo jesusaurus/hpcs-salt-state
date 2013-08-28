@@ -29,12 +29,17 @@ elasticsearch:
       - file: /mnt/elasticsearch
       - file: /var/log/elasticsearch
       - file: /etc/init.d/elasticsearch
+      - file: /etc/security/limits.d/elasticsearch.conf
 
 /etc/init.d/elasticsearch:
   file.managed:
     - source: salt://elasticsearch/elasticsearch.initd
     - require:
       - pkg: elasticsearch
+
+/etc/security/limits.d/elasticsearch.conf:
+  file.managed:
+    - contents: "elasticsearch - nofile 2097152"
 
 /mnt/elasticsearch:
   file.directory:
