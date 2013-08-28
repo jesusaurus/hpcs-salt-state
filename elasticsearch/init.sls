@@ -28,6 +28,13 @@ elasticsearch:
       - pkg: elasticsearch
       - file: /mnt/elasticsearch
       - file: /var/log/elasticsearch
+      - file: /etc/init.d/elasticsearch
+
+/etc/init.d/elasticsearch:
+  file.managed:
+    - source: salt://elasticsearch/elasticsearch.initd
+    - require:
+      - pkg: elasticsearch
 
 /mnt/elasticsearch:
   file.directory:
