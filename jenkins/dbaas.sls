@@ -26,6 +26,7 @@ extra_build:
       - libxslt1-dev
       - python-pexpect
       - python-pycurl
+      - python-nose
       - reprepro
 
 mysql-python:
