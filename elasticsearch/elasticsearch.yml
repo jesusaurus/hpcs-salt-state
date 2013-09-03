@@ -20,7 +20,9 @@ index:
   routing.allocation.total_shards_per_node: {{ pillar['elasticsearch']['shards_per_node'] }}
   cache.field.type: "soft"
 
-indices.memory.index_buffer_size: {{ pillar['elasticsearch']['indexsize'] }}
+indices:
+  memory.index_buffer_size: {{ pillar['elasticsearch']['indexsize'] }}
+  recovery.file_chunk_size: 8mb
 
 gateway:
   recover_after_nodes: 5

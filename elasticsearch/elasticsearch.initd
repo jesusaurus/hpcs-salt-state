@@ -72,7 +72,7 @@ ES_HOME=/usr/share/$NAME
 #ES_JAVA_OPTS=
 
 # Maximum number of open files
-MAX_OPEN_FILES=65535
+MAX_OPEN_FILES=1048576
 
 # Maximum amount of locked memory
 #MAX_LOCKED_MEMORY=
@@ -102,7 +102,7 @@ fi
 # Define other required variables
 PID_FILE=/var/run/$NAME.pid
 DAEMON=$ES_HOME/bin/elasticsearch
-DAEMON_OPTS="-p $PID_FILE -Des.default.config=$CONF_FILE -Des.default.path.home=$ES_HOME -Des.default.path.logs=$LOG_DIR -Des.default.path.data=$DATA_DIR -Des.default.path.work=$WORK_DIR -Des.default.path.conf=$CONF_DIR"
+DAEMON_OPTS="-p $PID_FILE -Des.default.config=$CONF_FILE -Des.default.path.home=$ES_HOME -Des.default.path.logs=$LOG_DIR -Des.default.path.data=$DATA_DIR -Des.default.path.work=$WORK_DIR -Des.default.path.conf=$CONF_DIR -Des.max-open-files=true"
 
 export ES_HEAP_SIZE
 export ES_HEAP_NEWSIZE
