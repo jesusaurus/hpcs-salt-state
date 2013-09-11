@@ -34,6 +34,7 @@ elasticsearch:
 /etc/init.d/elasticsearch:
   file.managed:
     - source: salt://elasticsearch/elasticsearch.initd
+    - mode: 755
     - require:
       - pkg: elasticsearch
 
