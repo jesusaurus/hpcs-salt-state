@@ -13,30 +13,16 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
-base:
-  '*':
-    - fail2ban
-    - datadog
-    - hpcs.network
-    - ntp
-    - ssh
-  'logstash*':
-    - hpcs.logstash
-  'esmaster*':
-    - hpcs.esmaster
-  'esnode*':
-    - hpcs.esslave
-  'jenkins.*':
-    - jenkins.master
-  '*.jenkins-slave':
-    - jenkins.slave
-  'msgaas*.jenkins-slave':
-    - jenkins.msgaas
-  'dbaas*.jenkins-slave':
-    - jenkins.dbaas
-  'cie*.jenkins-slave':
-    - jenkins.cie
-  'pypi*':
-    - pypi
-  'apt*':
-    - apt.mirror
+include:
+  - tinc
+  - logstash
+
+{% from "logstash/indexer.sls" import indexer %}
+
+{% for x in range(1, salt['grains.get']('num_cpus')) %}
+{{ indexer(i=x,
+           rhost=salt['pillar.get']('tinc:elasticsearch:hosts:logstash:subnet').split('/')[0],
+           rpass=salt['pillar.get']('redis:password'),
+           ehost=salt['pillar.get']('elasticsearch:publish:esmaster1'),
+           eflush=5000) }}
+{% endfor %}
