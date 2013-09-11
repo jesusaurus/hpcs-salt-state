@@ -1,6 +1,6 @@
 [gerrit]
 host=gerrit.paas.hpcloud.net
 port=29418
-project=cie-salt-state
+project=cie/salt-state
 defaultbranch=master
 
