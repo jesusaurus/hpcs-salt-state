@@ -15,6 +15,7 @@
 #
 include:
   - java
+  - ssl
 
 logstash:
   user.present:
@@ -26,6 +27,7 @@ logstash:
       - ssl-cert
     - require:
       - group: logstash
+      - group: ssl-cert
   group.present:
     - system: True
 

@@ -13,10 +13,25 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
+{% macro indexer(i, rpass, rhost="127.0.0.1", ehost="127.0.0.1", eflush=100) %}
 include:
   - logstash
 
-{% for i in ['1', '2', '3'] %}
+/etc/logstash/indexer{{i}}.conf:
+  file.managed:
+    - source: salt://logstash/indexer.conf
+    - template: jinja
+    - context: { 
+      redis_host: "{{ rhost }}",
+      redis_password: "{{ rpass }}",
+      es_host: "{{ ehost }}",
+      es_flushsize: "{{ eflush }}",
+      }
+    - user: logstash
+    - group: logstash
+    - require:
+      - file: /etc/logstash
+
 /etc/init/logstash-indexer{{i}}.conf:
   file.managed:
     - source: salt://logstash/indexer.init
@@ -24,16 +39,6 @@ include:
     - context: { i: {{ i }} }
     - user: root
     - group: root
-
-/etc/logstash/indexer{{i}}.conf:
-  file.managed:
-    - source: salt://logstash/indexer.conf
-    - template: jinja
-    - context: { addr: {{ pillar['elasticsearch']['publish']['esmaster' + i] }} }
-    - user: logstash
-    - group: logstash
-    - require:
-      - file: /etc/logstash
 
 logstash-indexer{{i}}:
   service.running:
@@ -44,5 +49,4 @@ logstash-indexer{{i}}:
     - watch:
       - file: /etc/logstash/indexer{{i}}.conf
       - file: /etc/init/logstash-indexer{{i}}.conf
-      - service: redis-server
-{% endfor %}
+{% endmacro %}
