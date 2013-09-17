@@ -1,0 +1,12 @@
+rabbit_ssl_cert: |
+  -----BEGIN CERTIFICATE-----
+  <your key data here> 
+  -----END CERTIFICATE-----
+rabbit_ssl_key: |
+  -----BEGIN RSA PRIVATE KEY-----
+  <your key data here>
+  -----END RSA PRIVATE KEY-----
+rabbit_ca_cert: |
+  -----BEGIN CERTIFICATE-----
+  <your key data here>
+  -----END CERTIFICATE-----

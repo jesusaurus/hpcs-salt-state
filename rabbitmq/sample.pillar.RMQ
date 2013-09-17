@@ -1,0 +1,39 @@
+# To configure RabbitMQ cluster nodes, both hostname and IP,
+# as well as their mapping are important. If the nodes are
+# not in the same 10-subnet, please user public IP for each node.
+# Master node needs to be defined among the list of cluster nodes,
+# and the rest are all slave nodes.  
+#
+rabbit_cluster_master: rmq-1
+rabbit_host_ip_list:
+  rmq-1: 15.100.100.101
+  rmq-2: 15.100.100.102
+  rmq-3: 15.100.100.103
+
+# RMQ cluster node names are defined in a restrict format required by
+# rabbitmq.config. Make sure the list of nodes defined here matches
+# the nodes defined in above rabbit_host_ip_list section.
+rabbit_cluster_node_names: '''rabbit@rmq-1'',''rabbit@rmq-2'',''rabbit@rmq-3'''
+
+# Erlang cookie is needed for RabbitMQ cross-node communication,
+# and is shared by all cluster node including master and slaves.
+# It is optional for Users to replace this default cookie with
+# a unique one. An new erlang cookie will always be generated at
+# /var/lib/rabbitmq/.erlang.cookie when a new standalone RabbitMQ
+# server is installed.
+#
+rabbit_master_cookie: SAJEALFKDBSIYRQBBOFM
+
+# One and only one admin user needs to be defined and this user
+# will have full privilege to do all operations on all vhosts.
+# More users can be added later once RabbitMQ is up, but not recommended
+# since multiple admin users may introduce security concerns.
+#
+rabbit_admin_user: hpcs
+rabbit_admin_password: hpcs
+
+# To allow for state files to be moved to different directory structures on
+# different salt masters, will set salt root path via pillar.
+#
+salt_state_root: private/rabbitmq/
+
