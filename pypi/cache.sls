@@ -27,12 +27,12 @@ pypicache_deps:
 
 pypicache:
   cmd.run:
-    - name: 'python -m pypicache.main --port {{ pillar['pypi']['port'] }} {{ pillar['pypi']['path'] }} > /var/log/pypicache.log 2> /var/log/pypicache.err &'
-    - user: {{ pillar['pypi']['user'] }}
-    - unless: 'lsof -i :{{ pillar['pypi']['port'] }}'
+    - name: 'python -m pypicache.main --port {{ salt['pillar.get']('pypi:port', '8080') }} {{ salt['pillar.get']('pypi:path', '/var/cache/pypi') }} > /var/log/pypicache.log 2> /var/log/pypicache.err &'
+    - user: {{ salt['pillar.get']('pypi:user', 'pypi') }}
+    - unless: 'lsof -i :{{ salt['pillar.get']('pypi:port', '8080') }}'
     - require:
-      - user: {{ pillar['pypi']['user'] }}
-      - file: {{ pillar['pypi']['path'] }}
+      - user: {{ salt['pillar.get']('pypi:user', 'pypi') }}
+      - file: {{ salt['pillar.get']('pypi:path', '/var/cache/pypi') }}
       - file: /var/log/pypicache.log
       - file: /var/log/pypicache.err
     - watch:
@@ -40,12 +40,12 @@ pypicache:
 
 /var/log/pypicache.log:
   file.managed:
-    - user: {{ pillar['pypi']['user'] }}
+    - user: {{ salt['pillar.get']('pypi:user', 'pypi') }}
 
 /var/log/pypicache.err:
   file.managed:
-    - user: {{ pillar['pypi']['user'] }}
+    - user: {{ salt['pillar.get']('pypi:user', 'pypi') }}
 
-{{ pillar['pypi']['path'] }}:
+{{ salt['pillar.get']('pypi:path', '/var/cache/pypi') }}:
   file.directory:
-    - user: {{ pillar['pypi']['user'] }}
+    - user: {{ salt['pillar.get']('pypi:user', 'pypi') }}

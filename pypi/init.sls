@@ -19,15 +19,15 @@ include:
 
 {% from "nginx/proxy.sls" import proxy %}
 
-{{ proxy(site='default', server='127.0.0.1', port=pillar['pypi']['port'], http=True, https=False) }}
+{{ proxy(site='default', server='127.0.0.1', port=salt['pillar.get']('pypi:port', '8080'), http=True, https=False) }}
 
-{{ pillar['pypi']['user'] }}:
+{{ salt['pillar.get']('pypi:user', 'pypi') }}:
   group:
     - present
   user.present:
-    - home: {{ pillar['pypi']['home'] }}
+    - home: {{ salt['pillar.get']('pypi:home', '/home/pypi') }}
     - shell: /bin/bash
     - gid_from_name: True
     - require:
-      - group: {{ pillar['pypi']['user'] }}
+      - group: {{ salt['pillar.get']('pypi:user', 'pypi') }}
 
