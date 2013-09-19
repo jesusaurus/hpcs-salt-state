@@ -17,6 +17,8 @@ fail2ban:
   pkg:
     - latest
   service.running:
+    - require:
+      - pkg: fail2ban
     - watch:
       - file: fail2ban.conf
       - file: fail2ban.jail.conf
