@@ -14,9 +14,6 @@
 #    under the License.
 #
 {% macro indexer(i, rpass, rhost="127.0.0.1", ehost="127.0.0.1", eflush=100) %}
-include:
-  - logstash
-
 /etc/logstash/indexer{{i}}.conf:
   file.managed:
     - source: salt://logstash/indexer.conf
