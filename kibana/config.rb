@@ -10,7 +10,7 @@ module KibanaConfig
   Elasticsearch = "localhost:9200"
 
   #Set the Net::HTTP read/open timeouts for the connection to the ES backend
-  ElasticsearchTimeout = 500
+  ElasticsearchTimeout = 10000
 
   # The port Kibana should listen on
   KibanaPort = 5601
@@ -113,7 +113,7 @@ module KibanaConfig
   # Kibana will use for the "Stats" and "Terms" to prevent ES crashes. For very
   # large data sets and undersized ES clusers, a limit of 1 is not unreasonable.
   # Default is 0 (unlimited)
-  Facet_index_limit = 2
+  Facet_index_limit = 1
 
   # You probably don't want to touch anything below this line
   # unless you really know what you're doing
