@@ -33,7 +33,7 @@ redis:
       - user: redis
       - group: redis
 
-/var/lib/redis:
+{{ salt['pillar.get']('redis:savedir', '/var/lib/redis') }}:
   file.directory:
     - user: redis
     - group: redis
