@@ -36,7 +36,7 @@ datadog:
     - watch:
       - file: /etc/dd-agent/datadog.conf
 
-{% if pillar.get('redis', false) %}
+{% if salt['pillar.get']('redis', false) %}
 python-redis:
   pkg.latest:
     - require-in:
@@ -50,7 +50,7 @@ python-redis:
       - service: datadog
 {% endif %}
 
-{% if pillar.get('elasticsearch', false) %}
+{% if salt['pillar.get']('elasticsearch', false) %}
 /etc/dd-agent/conf.d/elastic.yaml:
   file.managed:
     - source: salt://datadog/elastic.yaml
