@@ -43,7 +43,7 @@ redis:
 
 https://github.com/antirez/redis.git:
   git.latest:
-    - rev: 2.6.13
+    - rev: 2.6.16
     - force: True
     - target: /mnt/redis/src
     - require:
