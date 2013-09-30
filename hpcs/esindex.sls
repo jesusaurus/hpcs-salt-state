@@ -23,6 +23,6 @@ include:
 {{ indexer(i=x,
            rhost=salt['pillar.get']('tinc:elasticsearch:hosts:logstash:subnet').split('/')[0],
            rpass=salt['pillar.get']('redis:password'),
-           ehost=salt['pillar.get']('elasticsearch:publish:esmaster1'),
+           ehost=salt['pillar.get']('elasticsearch:publish:esmaster1', '127.0.0.1'),
            eflush=5000) }}
 {% endfor %}
