@@ -17,7 +17,7 @@
 # make hpcloud instances aware of their public ips
 {% if pillar['network']['addr'].get(grains['host'], false) %}
 {% for ip in pillar['network']['addr'][grains['host']] %}
-public_ip:
+public_ip_{{ip}}:
   cmd.run:
     - name: ip addr add {{ ip }}/32 dev lo
     - unless: ip addr show | grep {{ ip }}
