@@ -20,7 +20,7 @@ networking:
 
 /root/rabbitmq.config:
   file.managed:
-    - source: salt://{{pillar['salt_state_root']}}rabbitmq/cluster/rabbitmq.config
+    - source: salt://{{pillar['salt_state_root']}}rabbitmq/rabbitmq.config
     - template: jinja
 
 /root/ssl:
@@ -31,7 +31,7 @@ networking:
 
 /root/install_rmq_cluster_node.sh:
   file.managed:
-    - source: salt://{{pillar['salt_state_root']}}rabbitmq/cluster/install_rmq_cluster_node.sh
+    - source: salt://{{pillar['salt_state_root']}}rabbitmq/install_rmq_cluster_node.sh
     - template: jinja
     - mode: 755
 
