@@ -37,6 +37,7 @@ kibana:
     - name: https://github.com/rashidkpc/Kibana.git
     - rev: v0.2.0
     - force: True
+    - force_checkout: True
     - target: /mnt/kibana/site
     - runas: kibana
     - require:
