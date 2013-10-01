@@ -27,6 +27,6 @@ include:
 {% for x in [ '1', '2', '3' ] %}
 {{ indexer(i=x,
            rpass=salt['pillar.get']('redis:password'),
-           ehost=salt['pillar.get']('elasticsearch:publish:esmaster' + x),
+           ehost=salt['pillar.get']('elasticsearch:publish:esmaster' + x, '127.0.0.1'),
            eflush=500) }}
 {% endfor %}
