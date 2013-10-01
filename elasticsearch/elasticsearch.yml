@@ -1,7 +1,9 @@
 node:
   master: {% if master %}true{% else %}false{% endif %}
   data: {% if data %}true{% else %}false{% endif %}
+{%- if salt['pillar.get']('elasticsearch:zone', False) %}
   zone: {{ pillar['elasticsearch']['zone'][grains['host']] }}
+{%- endif %}
 
 path:
   conf: /etc/elasticsearch
@@ -30,8 +32,10 @@ gateway:
   expected_nodes: {{ pillar['elasticsearch']['publish'].keys()|length }}
 
 cluster.routing.allocation:
+{%- if salt['pillar.get']('elasticsearch:zone', False) %}
   awareness:
     attributes: zone
+{%- endif %}
   cluster_concurrent_rebalance: {{ pillar['elasticsearch']['rebalance'] }}
   allow_rebalance: indices_all_active
   node_concurrent_recoveries: {{ pillar['elasticsearch']['recoveries'] }}
