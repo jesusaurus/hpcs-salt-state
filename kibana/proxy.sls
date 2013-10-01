@@ -30,23 +30,33 @@ include:
     - source: salt://kibana/apache.conf
     - template: jinja
     - require:
-      - file: /etc/ssl/certs/kibana.proxy.crt
-      - file: /etc/ssl/private/kibana.proxy.key
-      - file: /var/www/kibana.htpasswd
+      - file: {{ salt['pillar.get']('kibana:htpasswd:path') }}
+      - file: {{ salt['pillar.get']('kibana:cert:path') }}
+      - file: {{ salt['pillar.get']('kibana:key:path') }}
+{% if salt['pillar.get']('kibana:chain', False) %}
+      - file: {{ salt['pillar.get']('kibana:chain:path') }}
+{% endif %}
     - watch_in:
       - service: {{ pillar['package']['apache'] }}
 
 /var/www/kibana.htpasswd:
   file.managed:
     - contents: |
-        {{ pillar['kibana']['htpasswd'] | indent(8) }}
+        {{ salt['pillar.get']('kibana:htpasswd:contents') | indent(8) }}
 
 /etc/ssl/certs/kibana.proxy.crt:
   file.managed:
     - contents: |
-        {{ pillar['kibana']['crt'] | indent(8) }}
+        {{ salt['pillar.get']('kibana:cert:contents') | indent(8) }}
 
 /etc/ssl/private/kibana.proxy.key:
   file.managed:
     - contents: |
-        {{ pillar['kibana']['key'] | indent(8) }}
+        {{ salt['pillar.get']('kibana:key:contents') | indent(8) }}
+
+{% if salt['pillar.get']('kibana:chain', False) %}
+{{ salt['pillar.get']('kibana:chain:path') }}:
+  file.managed:
+    - contents: |
+        {{ salt['pillar.get']('kibana:chain:contents') | indent(8) }}
+{% endif %}
