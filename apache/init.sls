@@ -19,6 +19,6 @@ include:
 {{ pillar['package']['apache'] }}:
   pkg:
     - installed
-  service:
-    - running
+  service.running:
+    - reload: True
 
