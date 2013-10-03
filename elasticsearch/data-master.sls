@@ -13,32 +13,31 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
-base:
-  '*':
-    - fail2ban
-    - datadog
-    - hpcs.network
-    - ntp
-    - ssh
-  'logstash*':
-    - hpcs.logstash
-  'esmaster*':
-    - hpcs.esmaster
-  'esnode*':
-    - hpcs.esslave
-  'escluster*':
-    - hpcs.escluster
-  'jenkins.*':
-    - jenkins.master
-  '*.jenkins-slave':
-    - jenkins.slave
-  'msgaas*.jenkins-slave':
-    - jenkins.msgaas
-  'dbaas*.jenkins-slave':
-    - jenkins.dbaas
-  'cie*.jenkins-slave':
-    - jenkins.cie
-  'pypi*':
-    - pypi
-  'apt*':
-    - apt.mirror
+include:
+  - elasticsearch
+
+/etc/elasticsearch/elasticsearch.yml:
+  file.managed:
+    - source: salt://elasticsearch/elasticsearch.yml
+    - user: root
+    - group: root
+    - mode: 0644
+    - template: jinja
+    - context: {
+      master: true,
+      data: true }
+    - require:
+      - pkg: elasticsearch
+
+/etc/default/elasticsearch:
+  file.managed:
+    - source: salt://elasticsearch/elasticsearch.default
+    - user: root
+    - group: root
+    - mode: 0644
+    - template: jinja
+    - context: {
+      master: true,
+      data: true }
+    - require:
+      - pkg: elasticsearch
