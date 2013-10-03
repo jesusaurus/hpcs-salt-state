@@ -93,7 +93,7 @@ stop_rabbitmq_service:
 # If run_from_jenkins exists AND we're not on master then do this
 /var/lib/rabbitmq/.erlang.cookie:
   file.managed:
-    - source: salt://{{pillar['salt_state_root']}}rabbitmq/cluster/erlang.cookie
+    - source: salt://{{pillar['salt_state_root']}}rabbitmq/erlang.cookie
     - template: jinja
     - user: rabbitmq
     - group: rabbitmq
@@ -107,7 +107,7 @@ stop_rabbitmq_service:
 #If run_from_jenkins doesn't exist then do this for all servers
 /var/lib/rabbitmq/.erlang.cookie:
   file.managed:
-    - source: salt://{{pillar['salt_state_root']}}rabbitmq/cluster/erlang.cookie
+    - source: salt://{{pillar['salt_state_root']}}rabbitmq/erlang.cookie
     - template: jinja
     - user: rabbitmq
     - group: rabbitmq
