@@ -15,6 +15,7 @@
 #
 base:
   '*':
+    - apt.client
     - fail2ban
     - datadog
     - hpcs.network

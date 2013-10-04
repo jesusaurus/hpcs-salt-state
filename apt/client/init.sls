@@ -13,7 +13,18 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
-reprepro:
-  pkg:
-    - latest
+
+# Use some custom package repositories
+{%- for name, repo in salt['pillar.get']('apt_repo', {}).iteritems() %}
+{{ name }}:
+  pkgrepo.managed:
+    - name: {{ repo['line'] }}
+    - file: {{ repo['file'] }}
+{%- if 'keyid' in repo %}
+    - keyid: {{ repo['keyid'] }}
+    - keyserver: {{ repo['keyserver'] |default('keyserver.ubuntu.com') }}
+{%- elif 'keyurl' in repo %}
+    - key_url: {{ repo['keyurl'] }}
+{%- endif %}
+{%- endfor %}
 

@@ -1,3 +1,14 @@
+apt_repo:
+  rabbitmq:
+    line: deb http://www.rabbitmq.com/debian testing main
+    file: /etc/apt/sources.list.d/datadog.list
+    keyurl: http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+  my_partial_mirror:
+    line: deb http://example.com precise main
+    file: /etc/apt/sources.list.d/my_repo.list
+    keyid: 0000ffff
+    keyserver: keys.example.com
+
 apt:
   cache:
     path: /var/cache/apt-cacher-ng
