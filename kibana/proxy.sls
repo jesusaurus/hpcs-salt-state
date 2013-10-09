@@ -39,17 +39,17 @@ include:
     - watch_in:
       - service: {{ pillar['package']['apache'] }}
 
-/var/www/kibana.htpasswd:
+{{ salt['pillar.get']('kibana:htpasswd:path') }}:
   file.managed:
     - contents: |
         {{ salt['pillar.get']('kibana:htpasswd:contents') | indent(8) }}
 
-/etc/ssl/certs/kibana.proxy.crt:
+{{ salt['pillar.get']('kibana:cert:path') }}:
   file.managed:
     - contents: |
         {{ salt['pillar.get']('kibana:cert:contents') | indent(8) }}
 
-/etc/ssl/private/kibana.proxy.key:
+{{ salt['pillar.get']('kibana:key:path') }}:
   file.managed:
     - contents: |
         {{ salt['pillar.get']('kibana:key:contents') | indent(8) }}
