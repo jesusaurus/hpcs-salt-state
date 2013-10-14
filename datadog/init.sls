@@ -17,7 +17,7 @@
 datadog:
 {% if grains['os_family'] == 'Debian' %}
   pkgrepo.managed:
-    - name: deb http://apt.datadoghq.com/ unstable main
+    - name: deb http://apt.datadoghq.com unstable main
     - file: /etc/apt/sources.list.d/datadog.list
     - keyserver: keyserver.ubuntu.com
     - keyid: C7A7DA52
