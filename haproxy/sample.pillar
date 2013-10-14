@@ -7,12 +7,13 @@ haproxy:
       connect: 5000ms
       client: 50000ms
       server: 50000ms
-  listens:
-    https-in:
-      bind: '*:443'
-      servers:
-        server1:
-          addr: '10.0.0.1:8443'
-        server2:
-          addr: '10.0.0.2'
-          params: 'maxconn 256'
+
+haproxy_listens:
+  https-in:
+    bind: '*:443'
+    servers:
+      server1:
+        addr: '10.0.0.1:8443'
+      server2:
+        addr: '10.0.0.2'
+        params: 'maxconn 256'
