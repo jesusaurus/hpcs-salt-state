@@ -30,11 +30,13 @@
 {% for type in ['rsa', 'dsa', 'ecdsa'] %}
 /etc/ssh/ssh_host_{{type}}_key:
   file.managed:
+    - mode: 600
     - contents: |
 {{ salt['pillar.get']('redis:tunnel:hostkeys:' + type + ':private') | indent(8, true) }}
 
 /etc/ssh/ssh_host_{{type}}_key.pub:
   file.managed:
+    - mode: 644
     - contents: |
 {{ salt['pillar.get']('redis:tunnel:hostkeys:' + type + ':public') | indent(8, true) }}
 {% endfor %}
