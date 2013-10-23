@@ -66,11 +66,8 @@ apply_config() {
   echo "RABBITMQ_MNESIA_BASE=/mnt/rabbitmq/mnesia" > /etc/rabbitmq/rabbitmq-env.conf
   echo "RABBITMQ_LOG_BASE=/mnt/rabbitmq/log" >> /etc/rabbitmq/rabbitmq-env.conf
 
-  # raise file descriptor limit for root user (rabbitmq picks this up)
-  cat >> /etc/security/limits.conf <<EOS
-root		hard	nofile		8192
-root		soft	nofile		8192
-EOS
+  # raise file descriptor limit (rabbitmq picks this up)
+echo "ulimit -n 8192" > /etc/default/rabbitmq-server
 
   # move RMQ Mnesia partition and logging to /mnt for sufficient disk space
   mkdir /mnt/rabbitmq
